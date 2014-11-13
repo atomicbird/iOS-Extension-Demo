@@ -65,8 +65,8 @@ NSString *const kDemoNoteFilename = @"notes.bin";
 
 - (NSURL *)demoNoteFileURL
 {
-    NSURL *documentsDirectoryURL = [[NSFileManager defaultManager] URLForDirectory:NSDocumentDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:nil];
-    NSURL *fileURL = [documentsDirectoryURL URLByAppendingPathComponent:kDemoNoteFilename];
+    NSURL *groupURL = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:@"group.com.atomicbird.demonotes"];
+    NSURL *fileURL = [groupURL URLByAppendingPathComponent:kDemoNoteFilename];
     return fileURL;
 }
 
