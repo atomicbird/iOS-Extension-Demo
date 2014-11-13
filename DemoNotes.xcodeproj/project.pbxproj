@@ -121,6 +121,8 @@
 		EEDE71F11A156423007CD3D8 /* DemoSharedCodeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DemoSharedCodeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EEDE71F91A156423007CD3D8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EEDE71FA1A156423007CD3D8 /* DemoSharedCodeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DemoSharedCodeTests.m; sourceTree = "<group>"; };
+		EEDE72091A156B26007CD3D8 /* DemoNotes.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = DemoNotes.entitlements; sourceTree = "<group>"; };
+		EEDE720A1A156B7F007CD3D8 /* DemoToday.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = DemoToday.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -193,6 +195,7 @@
 		EEDE719E1A141B9A007CD3D8 /* DemoNotes */ = {
 			isa = PBXGroup;
 			children = (
+				EEDE72091A156B26007CD3D8 /* DemoNotes.entitlements */,
 				EEDE71A31A141B9A007CD3D8 /* AppDelegate.h */,
 				EEDE71A41A141B9A007CD3D8 /* AppDelegate.m */,
 				EEDE71A61A141B9A007CD3D8 /* MasterViewController.h */,
@@ -246,6 +249,7 @@
 		EEDE71D31A1560EC007CD3D8 /* DemoToday */ = {
 			isa = PBXGroup;
 			children = (
+				EEDE720A1A156B7F007CD3D8 /* DemoToday.entitlements */,
 				EEDE71D61A1560EC007CD3D8 /* TodayViewController.h */,
 				EEDE71D71A1560EC007CD3D8 /* TodayViewController.m */,
 				EEDE71D91A1560EC007CD3D8 /* MainInterface.storyboard */,
@@ -415,6 +419,12 @@
 				TargetAttributes = {
 					EEDE719B1A141B9A007CD3D8 = {
 						CreatedOnToolsVersion = 6.1;
+						DevelopmentTeam = FZTVR399HK;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					EEDE71B71A141B9A007CD3D8 = {
 						CreatedOnToolsVersion = 6.1;
@@ -422,6 +432,12 @@
 					};
 					EEDE71CE1A1560EC007CD3D8 = {
 						CreatedOnToolsVersion = 6.1;
+						DevelopmentTeam = FZTVR399HK;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					EEDE71E61A156423007CD3D8 = {
 						CreatedOnToolsVersion = 6.1;
@@ -672,9 +688,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = DemoNotes/DemoNotes.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = DemoNotes/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -682,9 +702,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = DemoNotes/DemoNotes.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = DemoNotes/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
@@ -725,6 +749,9 @@
 		EEDE71DF1A1560EC007CD3D8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = DemoToday/DemoToday.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -732,6 +759,7 @@
 				INFOPLIST_FILE = DemoToday/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -739,9 +767,13 @@
 		EEDE71E01A1560EC007CD3D8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = DemoToday/DemoToday.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = DemoToday/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
@@ -837,6 +869,7 @@
 				EEDE71C41A141B9A007CD3D8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		EEDE71C51A141B9A007CD3D8 /* Build configuration list for PBXNativeTarget "DemoNotesTests" */ = {
 			isa = XCConfigurationList;
@@ -845,6 +878,7 @@
 				EEDE71C71A141B9A007CD3D8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		EEDE71DE1A1560EC007CD3D8 /* Build configuration list for PBXNativeTarget "DemoToday" */ = {
 			isa = XCConfigurationList;
@@ -853,6 +887,7 @@
 				EEDE71E01A1560EC007CD3D8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		EEDE72001A156423007CD3D8 /* Build configuration list for PBXNativeTarget "DemoSharedCode" */ = {
 			isa = XCConfigurationList;
@@ -861,6 +896,7 @@
 				EEDE72021A156423007CD3D8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		EEDE72041A156423007CD3D8 /* Build configuration list for PBXNativeTarget "DemoSharedCodeTests" */ = {
 			isa = XCConfigurationList;
@@ -869,6 +905,7 @@
 				EEDE72061A156423007CD3D8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
