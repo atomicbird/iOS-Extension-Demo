@@ -26,6 +26,7 @@
 		EEDE71FF1A156423007CD3D8 /* DemoSharedCode.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EEDE71E71A156423007CD3D8 /* DemoSharedCode.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		EEDE72071A15642B007CD3D8 /* DemoNote.m in Sources */ = {isa = PBXBuildFile; fileRef = EEDE71C91A141E46007CD3D8 /* DemoNote.m */; };
 		EEDE72081A1564D6007CD3D8 /* DemoNote.h in Headers */ = {isa = PBXBuildFile; fileRef = EEDE71C81A141E46007CD3D8 /* DemoNote.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EEDE720D1A1570D2007CD3D8 /* DemoSharedCode.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEDE71E71A156423007CD3D8 /* DemoSharedCode.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +59,13 @@
 			remoteInfo = DemoNotes;
 		};
 		EEDE71FC1A156423007CD3D8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EEDE71941A141B9A007CD3D8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EEDE71E61A156423007CD3D8;
+			remoteInfo = DemoSharedCode;
+		};
+		EEDE720B1A156FCB007CD3D8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EEDE71941A141B9A007CD3D8 /* Project object */;
 			proxyType = 1;
@@ -145,6 +153,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EEDE720D1A1570D2007CD3D8 /* DemoSharedCode.framework in Frameworks */,
 				EEDE71D21A1560EC007CD3D8 /* NotificationCenter.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -365,6 +374,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				EEDE720C1A156FCB007CD3D8 /* PBXTargetDependency */,
 			);
 			name = DemoToday;
 			productName = DemoToday;
@@ -584,6 +594,11 @@
 			target = EEDE71E61A156423007CD3D8 /* DemoSharedCode */;
 			targetProxy = EEDE71FC1A156423007CD3D8 /* PBXContainerItemProxy */;
 		};
+		EEDE720C1A156FCB007CD3D8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EEDE71E61A156423007CD3D8 /* DemoSharedCode */;
+			targetProxy = EEDE720B1A156FCB007CD3D8 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
@@ -781,6 +796,7 @@
 		EEDE72011A156423007CD3D8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -803,6 +819,7 @@
 		EEDE72021A156423007CD3D8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
