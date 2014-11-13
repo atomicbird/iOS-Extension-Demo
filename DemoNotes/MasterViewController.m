@@ -8,10 +8,15 @@
 
 #import "MasterViewController.h"
 #import "DetailViewController.h"
+#import "DemoNote.h"
+
+NSString *const kDemoNoteFilename = @"notes.bin";
 
 @interface MasterViewController ()
 
-@property NSMutableArray *objects;
+@property (readwrite, strong) NSMutableArray *objects;
+@property (readwrite, strong) NSPredicate *hasChangesPredicate;
+@property (readwrite, strong) NSIndexPath *editingNoteIndexPath;
 @end
 
 @implementation MasterViewController
@@ -32,6 +37,37 @@
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
     self.navigationItem.rightBarButtonItem = addButton;
     self.detailViewController = (DetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
+    
+    NSData *savedData = [NSData dataWithContentsOfURL:[self demoNoteFileURL]];
+    if (savedData != nil) {
+        NSArray *savedObjects = [NSKeyedUnarchiver unarchiveObjectWithData:savedData];
+        if (savedObjects != nil) {
+            self.objects = [savedObjects mutableCopy];
+        }
+    }
+    
+    if (self.objects == nil) {
+        self.objects = [NSMutableArray array];
+    }
+    
+    _hasChangesPredicate = [NSPredicate predicateWithFormat:@"hasChanges = YES"];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    if (self.editingNoteIndexPath != nil) {
+        [self saveNotes];
+        [self.tableView reloadRowsAtIndexPaths:@[self.editingNoteIndexPath] withRowAnimation:NO];
+        self.editingNoteIndexPath = nil;
+    }
+}
+
+- (NSURL *)demoNoteFileURL
+{
+    NSURL *documentsDirectoryURL = [[NSFileManager defaultManager] URLForDirectory:NSDocumentDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:nil];
+    NSURL *fileURL = [documentsDirectoryURL URLByAppendingPathComponent:kDemoNoteFilename];
+    return fileURL;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -43,9 +79,21 @@
     if (!self.objects) {
         self.objects = [[NSMutableArray alloc] init];
     }
-    [self.objects insertObject:[NSDate date] atIndex:0];
+    NSString *newNoteTitle = [NSString stringWithFormat:@"Note %lu", (unsigned long)[self.objects count]];
+    DemoNote *newNote = [[DemoNote alloc] initWithText:newNoteTitle];
+    [self.objects insertObject:newNote atIndex:0];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
     [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self saveNotes];
+}
+
+- (void)saveNotes
+{
+    NSArray *changedObjects = [self.objects filteredArrayUsingPredicate:self.hasChangesPredicate];
+    if (changedObjects.count > 0) {
+        NSData *saveData = [NSKeyedArchiver archivedDataWithRootObject:self.objects];
+        [saveData writeToURL:[self demoNoteFileURL] atomically:YES];
+    }
 }
 
 #pragma mark - Segues
@@ -53,11 +101,12 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString:@"showDetail"]) {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        NSDate *object = self.objects[indexPath.row];
+        DemoNote *object = self.objects[indexPath.row];
         DetailViewController *controller = (DetailViewController *)[[segue destinationViewController] topViewController];
         [controller setDetailItem:object];
         controller.navigationItem.leftBarButtonItem = self.splitViewController.displayModeButtonItem;
         controller.navigationItem.leftItemsSupplementBackButton = YES;
+        self.editingNoteIndexPath = [self.tableView indexPathForSelectedRow];
     }
 }
 
@@ -74,8 +123,8 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
 
-    NSDate *object = self.objects[indexPath.row];
-    cell.textLabel.text = [object description];
+    DemoNote *object = self.objects[indexPath.row];
+    cell.textLabel.text = [object text];
     return cell;
 }
 
@@ -88,6 +137,7 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         [self.objects removeObjectAtIndex:indexPath.row];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        [self saveNotes];
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
     }

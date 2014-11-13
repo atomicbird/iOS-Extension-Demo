@@ -15,6 +15,7 @@
 		EEDE71B01A141B9A007CD3D8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EEDE71AF1A141B9A007CD3D8 /* Images.xcassets */; };
 		EEDE71B31A141B9A007CD3D8 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = EEDE71B11A141B9A007CD3D8 /* LaunchScreen.xib */; };
 		EEDE71BF1A141B9A007CD3D8 /* DemoNotesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EEDE71BE1A141B9A007CD3D8 /* DemoNotesTests.m */; };
+		EEDE71CA1A141E46007CD3D8 /* DemoNote.m in Sources */ = {isa = PBXBuildFile; fileRef = EEDE71C91A141E46007CD3D8 /* DemoNote.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +44,8 @@
 		EEDE71B81A141B9A007CD3D8 /* DemoNotesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DemoNotesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EEDE71BD1A141B9A007CD3D8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EEDE71BE1A141B9A007CD3D8 /* DemoNotesTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DemoNotesTests.m; sourceTree = "<group>"; };
+		EEDE71C81A141E46007CD3D8 /* DemoNote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoNote.h; sourceTree = "<group>"; };
+		EEDE71C91A141E46007CD3D8 /* DemoNote.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoNote.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +97,8 @@
 				EEDE71AF1A141B9A007CD3D8 /* Images.xcassets */,
 				EEDE71B11A141B9A007CD3D8 /* LaunchScreen.xib */,
 				EEDE719F1A141B9A007CD3D8 /* Supporting Files */,
+				EEDE71C81A141E46007CD3D8 /* DemoNote.h */,
+				EEDE71C91A141E46007CD3D8 /* DemoNote.m */,
 			);
 			path = DemoNotes;
 			sourceTree = "<group>";
@@ -225,6 +230,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EEDE71A51A141B9A007CD3D8 /* AppDelegate.m in Sources */,
+				EEDE71CA1A141E46007CD3D8 /* DemoNote.m in Sources */,
 				EEDE71A81A141B9A007CD3D8 /* MasterViewController.m in Sources */,
 				EEDE71A21A141B9A007CD3D8 /* main.m in Sources */,
 				EEDE71AB1A141B9A007CD3D8 /* DetailViewController.m in Sources */,
