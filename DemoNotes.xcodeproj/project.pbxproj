@@ -16,6 +16,10 @@
 		EEDE71B31A141B9A007CD3D8 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = EEDE71B11A141B9A007CD3D8 /* LaunchScreen.xib */; };
 		EEDE71BF1A141B9A007CD3D8 /* DemoNotesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EEDE71BE1A141B9A007CD3D8 /* DemoNotesTests.m */; };
 		EEDE71CA1A141E46007CD3D8 /* DemoNote.m in Sources */ = {isa = PBXBuildFile; fileRef = EEDE71C91A141E46007CD3D8 /* DemoNote.m */; };
+		EEDE71D21A1560EC007CD3D8 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEDE71D11A1560EC007CD3D8 /* NotificationCenter.framework */; };
+		EEDE71D81A1560EC007CD3D8 /* TodayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEDE71D71A1560EC007CD3D8 /* TodayViewController.m */; };
+		EEDE71DA1A1560EC007CD3D8 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EEDE71D91A1560EC007CD3D8 /* MainInterface.storyboard */; };
+		EEDE71DD1A1560EC007CD3D8 /* DemoToday.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = EEDE71CF1A1560EC007CD3D8 /* DemoToday.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -26,7 +30,28 @@
 			remoteGlobalIDString = EEDE719B1A141B9A007CD3D8;
 			remoteInfo = DemoNotes;
 		};
+		EEDE71DB1A1560EC007CD3D8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EEDE71941A141B9A007CD3D8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EEDE71CE1A1560EC007CD3D8;
+			remoteInfo = DemoToday;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		EEDE71E11A1560EC007CD3D8 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				EEDE71DD1A1560EC007CD3D8 /* DemoToday.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		EEDE719C1A141B9A007CD3D8 /* DemoNotes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DemoNotes.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -46,6 +71,12 @@
 		EEDE71BE1A141B9A007CD3D8 /* DemoNotesTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DemoNotesTests.m; sourceTree = "<group>"; };
 		EEDE71C81A141E46007CD3D8 /* DemoNote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoNote.h; sourceTree = "<group>"; };
 		EEDE71C91A141E46007CD3D8 /* DemoNote.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoNote.m; sourceTree = "<group>"; };
+		EEDE71CF1A1560EC007CD3D8 /* DemoToday.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = DemoToday.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		EEDE71D11A1560EC007CD3D8 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
+		EEDE71D51A1560EC007CD3D8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EEDE71D61A1560EC007CD3D8 /* TodayViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TodayViewController.h; sourceTree = "<group>"; };
+		EEDE71D71A1560EC007CD3D8 /* TodayViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TodayViewController.m; sourceTree = "<group>"; };
+		EEDE71D91A1560EC007CD3D8 /* MainInterface.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainInterface.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +94,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		EEDE71CC1A1560EC007CD3D8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EEDE71D21A1560EC007CD3D8 /* NotificationCenter.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -71,6 +110,8 @@
 			children = (
 				EEDE719E1A141B9A007CD3D8 /* DemoNotes */,
 				EEDE71BB1A141B9A007CD3D8 /* DemoNotesTests */,
+				EEDE71D31A1560EC007CD3D8 /* DemoToday */,
+				EEDE71D01A1560EC007CD3D8 /* Frameworks */,
 				EEDE719D1A141B9A007CD3D8 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -80,6 +121,7 @@
 			children = (
 				EEDE719C1A141B9A007CD3D8 /* DemoNotes.app */,
 				EEDE71B81A141B9A007CD3D8 /* DemoNotesTests.xctest */,
+				EEDE71CF1A1560EC007CD3D8 /* DemoToday.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -129,6 +171,33 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		EEDE71D01A1560EC007CD3D8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				EEDE71D11A1560EC007CD3D8 /* NotificationCenter.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		EEDE71D31A1560EC007CD3D8 /* DemoToday */ = {
+			isa = PBXGroup;
+			children = (
+				EEDE71D61A1560EC007CD3D8 /* TodayViewController.h */,
+				EEDE71D71A1560EC007CD3D8 /* TodayViewController.m */,
+				EEDE71D91A1560EC007CD3D8 /* MainInterface.storyboard */,
+				EEDE71D41A1560EC007CD3D8 /* Supporting Files */,
+			);
+			path = DemoToday;
+			sourceTree = "<group>";
+		};
+		EEDE71D41A1560EC007CD3D8 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				EEDE71D51A1560EC007CD3D8 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -139,10 +208,12 @@
 				EEDE71981A141B9A007CD3D8 /* Sources */,
 				EEDE71991A141B9A007CD3D8 /* Frameworks */,
 				EEDE719A1A141B9A007CD3D8 /* Resources */,
+				EEDE71E11A1560EC007CD3D8 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				EEDE71DC1A1560EC007CD3D8 /* PBXTargetDependency */,
 			);
 			name = DemoNotes;
 			productName = DemoNotes;
@@ -167,6 +238,23 @@
 			productReference = EEDE71B81A141B9A007CD3D8 /* DemoNotesTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		EEDE71CE1A1560EC007CD3D8 /* DemoToday */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EEDE71DE1A1560EC007CD3D8 /* Build configuration list for PBXNativeTarget "DemoToday" */;
+			buildPhases = (
+				EEDE71CB1A1560EC007CD3D8 /* Sources */,
+				EEDE71CC1A1560EC007CD3D8 /* Frameworks */,
+				EEDE71CD1A1560EC007CD3D8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DemoToday;
+			productName = DemoToday;
+			productReference = EEDE71CF1A1560EC007CD3D8 /* DemoToday.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -182,6 +270,9 @@
 					EEDE71B71A141B9A007CD3D8 = {
 						CreatedOnToolsVersion = 6.1;
 						TestTargetID = EEDE719B1A141B9A007CD3D8;
+					};
+					EEDE71CE1A1560EC007CD3D8 = {
+						CreatedOnToolsVersion = 6.1;
 					};
 				};
 			};
@@ -200,6 +291,7 @@
 			targets = (
 				EEDE719B1A141B9A007CD3D8 /* DemoNotes */,
 				EEDE71B71A141B9A007CD3D8 /* DemoNotesTests */,
+				EEDE71CE1A1560EC007CD3D8 /* DemoToday */,
 			);
 		};
 /* End PBXProject section */
@@ -219,6 +311,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EEDE71CD1A1560EC007CD3D8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EEDE71DA1A1560EC007CD3D8 /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -245,6 +345,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		EEDE71CB1A1560EC007CD3D8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EEDE71D81A1560EC007CD3D8 /* TodayViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -252,6 +360,11 @@
 			isa = PBXTargetDependency;
 			target = EEDE719B1A141B9A007CD3D8 /* DemoNotes */;
 			targetProxy = EEDE71B91A141B9A007CD3D8 /* PBXContainerItemProxy */;
+		};
+		EEDE71DC1A1560EC007CD3D8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EEDE71CE1A1560EC007CD3D8 /* DemoToday */;
+			targetProxy = EEDE71DB1A1560EC007CD3D8 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -407,6 +520,30 @@
 			};
 			name = Release;
 		};
+		EEDE71DF1A1560EC007CD3D8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = DemoToday/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		EEDE71E01A1560EC007CD3D8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = DemoToday/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -432,6 +569,14 @@
 			buildConfigurations = (
 				EEDE71C61A141B9A007CD3D8 /* Debug */,
 				EEDE71C71A141B9A007CD3D8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		EEDE71DE1A1560EC007CD3D8 /* Build configuration list for PBXNativeTarget "DemoToday" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EEDE71DF1A1560EC007CD3D8 /* Debug */,
+				EEDE71E01A1560EC007CD3D8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 		};
