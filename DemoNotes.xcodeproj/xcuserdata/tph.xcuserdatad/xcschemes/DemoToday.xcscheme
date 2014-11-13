@@ -35,6 +35,20 @@
                ReferencedContainer = "container:DemoNotes.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "EEDE71F01A156423007CD3D8"
+               BuildableName = "DemoSharedCodeTests.xctest"
+               BlueprintName = "DemoSharedCodeTests"
+               ReferencedContainer = "container:DemoNotes.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -43,13 +57,23 @@
       shouldUseLaunchSchemeArgsEnv = "YES"
       buildConfiguration = "Debug">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "EEDE71F01A156423007CD3D8"
+               BuildableName = "DemoSharedCodeTests.xctest"
+               BlueprintName = "DemoSharedCodeTests"
+               ReferencedContainer = "container:DemoNotes.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "EEDE71CE1A1560EC007CD3D8"
-            BuildableName = "DemoToday.appex"
-            BlueprintName = "DemoToday"
+            BlueprintIdentifier = "EEDE719B1A141B9A007CD3D8"
+            BuildableName = "DemoNotes.app"
+            BlueprintName = "DemoNotes"
             ReferencedContainer = "container:DemoNotes.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -64,7 +88,11 @@
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable>
+      <IDERemoteRunnable
+         RemotePath = "/Today-View"
+         BundleIdentifier = "/Today-View">
+      </IDERemoteRunnable>
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "EEDE719B1A141B9A007CD3D8"
@@ -72,7 +100,7 @@
             BlueprintName = "DemoNotes"
             ReferencedContainer = "container:DemoNotes.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>

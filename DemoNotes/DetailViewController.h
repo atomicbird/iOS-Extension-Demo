@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "DemoNote.h"
+#import <DemoSharedCode/DemoSharedCode.h>
 
 @interface DetailViewController : UIViewController
 

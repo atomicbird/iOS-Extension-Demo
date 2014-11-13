@@ -9,6 +9,11 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>DemoSharedCode.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
 		<key>DemoToday.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -28,6 +33,16 @@
 			<true/>
 		</dict>
 		<key>EEDE71CE1A1560EC007CD3D8</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EEDE71E61A156423007CD3D8</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EEDE71F01A156423007CD3D8</key>
 		<dict>
 			<key>primary</key>
 			<true/>

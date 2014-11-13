@@ -8,7 +8,7 @@
 
 #import "MasterViewController.h"
 #import "DetailViewController.h"
-#import "DemoNote.h"
+#import <DemoSharedCode/DemoSharedCode.h>
 
 NSString *const kDemoNoteFilename = @"notes.bin";
 
