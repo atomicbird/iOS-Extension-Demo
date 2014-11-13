@@ -93,6 +93,7 @@ NSString *const kDemoNoteFilename = @"notes.bin";
     if (changedObjects.count > 0) {
         NSData *saveData = [NSKeyedArchiver archivedDataWithRootObject:self.objects];
         [saveData writeToURL:[self demoNoteFileURL] atomically:YES];
+        [changedObjects makeObjectsPerformSelector:@selector(setHasChanges:) withObject:@NO];
     }
 }
 
