@@ -10,6 +10,8 @@
 		EE9A19D81A16898800CBD6AD /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE9A19D71A16898800CBD6AD /* ShareViewController.m */; };
 		EE9A19DA1A16898800CBD6AD /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE9A19D91A16898800CBD6AD /* MainInterface.storyboard */; };
 		EE9A19DD1A16898800CBD6AD /* Share to Note.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = EE9A19D21A16898800CBD6AD /* Share to Note.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		EE9A19E21A168BFD00CBD6AD /* DemoPreprocessor.js in Resources */ = {isa = PBXBuildFile; fileRef = EE9A19E11A168BFD00CBD6AD /* DemoPreprocessor.js */; };
+		EE9A19E41A168EEA00CBD6AD /* DemoSharedCode.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEDE71E71A156423007CD3D8 /* DemoSharedCode.framework */; };
 		EEDE71A21A141B9A007CD3D8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EEDE71A11A141B9A007CD3D8 /* main.m */; };
 		EEDE71A51A141B9A007CD3D8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EEDE71A41A141B9A007CD3D8 /* AppDelegate.m */; };
 		EEDE71A81A141B9A007CD3D8 /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEDE71A71A141B9A007CD3D8 /* MasterViewController.m */; };
@@ -39,6 +41,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = EE9A19D11A16898800CBD6AD;
 			remoteInfo = "Share to Note";
+		};
+		EE9A19E51A168EF900CBD6AD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EEDE71941A141B9A007CD3D8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EEDE71E61A156423007CD3D8;
+			remoteInfo = DemoSharedCode;
 		};
 		EEDE71B91A141B9A007CD3D8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -116,6 +125,8 @@
 		EE9A19D61A16898800CBD6AD /* ShareViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShareViewController.h; sourceTree = "<group>"; };
 		EE9A19D71A16898800CBD6AD /* ShareViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShareViewController.m; sourceTree = "<group>"; };
 		EE9A19D91A16898800CBD6AD /* MainInterface.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainInterface.storyboard; sourceTree = "<group>"; };
+		EE9A19E11A168BFD00CBD6AD /* DemoPreprocessor.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = DemoPreprocessor.js; sourceTree = "<group>"; };
+		EE9A19E31A168C0D00CBD6AD /* Share to Note.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Share to Note.entitlements"; sourceTree = "<group>"; };
 		EEDE719C1A141B9A007CD3D8 /* DemoNotes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DemoNotes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EEDE71A01A141B9A007CD3D8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EEDE71A11A141B9A007CD3D8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -154,6 +165,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EE9A19E41A168EEA00CBD6AD /* DemoSharedCode.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -202,6 +214,8 @@
 		EE9A19D31A16898800CBD6AD /* Share to Note */ = {
 			isa = PBXGroup;
 			children = (
+				EE9A19E31A168C0D00CBD6AD /* Share to Note.entitlements */,
+				EE9A19E11A168BFD00CBD6AD /* DemoPreprocessor.js */,
 				EE9A19D61A16898800CBD6AD /* ShareViewController.h */,
 				EE9A19D71A16898800CBD6AD /* ShareViewController.m */,
 				EE9A19D91A16898800CBD6AD /* MainInterface.storyboard */,
@@ -379,6 +393,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				EE9A19E61A168EF900CBD6AD /* PBXTargetDependency */,
 			);
 			name = "Share to Note";
 			productName = "Share to Note";
@@ -492,6 +507,11 @@
 					EE9A19D11A16898800CBD6AD = {
 						CreatedOnToolsVersion = 6.1;
 						DevelopmentTeam = FZTVR399HK;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					EEDE719B1A141B9A007CD3D8 = {
 						CreatedOnToolsVersion = 6.1;
@@ -552,6 +572,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EE9A19E21A168BFD00CBD6AD /* DemoPreprocessor.js in Resources */,
 				EE9A19DA1A16898800CBD6AD /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -657,6 +678,11 @@
 			target = EE9A19D11A16898800CBD6AD /* Share to Note */;
 			targetProxy = EE9A19DB1A16898800CBD6AD /* PBXContainerItemProxy */;
 		};
+		EE9A19E61A168EF900CBD6AD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EEDE71E61A156423007CD3D8 /* DemoSharedCode */;
+			targetProxy = EE9A19E51A168EF900CBD6AD /* PBXContainerItemProxy */;
+		};
 		EEDE71BA1A141B9A007CD3D8 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = EEDE719B1A141B9A007CD3D8 /* DemoNotes */;
@@ -712,6 +738,7 @@
 		EE9A19DF1A16898800CBD6AD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "Share to Note/Share to Note.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -721,6 +748,7 @@
 				INFOPLIST_FILE = "Share to Note/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -728,11 +756,13 @@
 		EE9A19E01A16898800CBD6AD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "Share to Note/Share to Note.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "Share to Note/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
@@ -993,6 +1023,7 @@
 				EE9A19E01A16898800CBD6AD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		EEDE71971A141B9A007CD3D8 /* Build configuration list for PBXProject "DemoNotes" */ = {
 			isa = XCConfigurationList;
