@@ -9,6 +9,9 @@
 #import "AppDelegate.h"
 #import "DetailViewController.h"
 
+NSString *noteRequestedNotification = @"noteRequestedNotification";
+NSString *noteRequestedIndex = @"noteRequestedIndex";
+
 @interface AppDelegate () <UISplitViewControllerDelegate>
 
 @end
@@ -22,6 +25,7 @@
     UINavigationController *navigationController = [splitViewController.viewControllers lastObject];
     navigationController.topViewController.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem;
     splitViewController.delegate = self;
+
     return YES;
 }
 
@@ -45,6 +49,17 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    NSString *noteIndexString = [url resourceSpecifier];
+    NSInteger noteIndex = [noteIndexString integerValue];
+    [[NSNotificationCenter defaultCenter] postNotificationName:noteRequestedNotification
+                                                        object:self
+                                                      userInfo:@{noteRequestedIndex: @(noteIndex)}];
+
+    return YES;
 }
 
 #pragma mark - Split view

@@ -19,6 +19,7 @@
 
 - (void)setDetailItem:(id)newDetailItem {
     if (_detailItem != newDetailItem) {
+        _detailItem.text = self.textView.text;
         _detailItem = newDetailItem;
             
         // Update the view.

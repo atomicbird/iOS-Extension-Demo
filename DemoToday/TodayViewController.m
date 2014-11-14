@@ -75,4 +75,10 @@ NSString *const kDemoNoteFilename = @"notes.bin";
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"demonote:%ld", (long)indexPath.row]];
+    [self.extensionContext openURL:url completionHandler:nil];
+}
+
 @end

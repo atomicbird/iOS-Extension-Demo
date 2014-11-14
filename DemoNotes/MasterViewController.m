@@ -9,6 +9,7 @@
 #import "MasterViewController.h"
 #import "DetailViewController.h"
 #import <DemoSharedCode/DemoSharedCode.h>
+#import "AppDelegate.h"
 
 NSString *const kDemoNoteFilename = @"notes.bin";
 
@@ -33,7 +34,7 @@ NSString *const kDemoNoteFilename = @"notes.bin";
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
-
+    
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
     self.navigationItem.rightBarButtonItem = addButton;
     self.detailViewController = (DetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
@@ -51,6 +52,11 @@ NSString *const kDemoNoteFilename = @"notes.bin";
     }
     
     _hasChangesPredicate = [NSPredicate predicateWithFormat:@"hasChanges = YES"];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(openRequestedNote:)
+                                                 name:noteRequestedNotification
+                                               object:[[UIApplication sharedApplication] delegate]];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -60,6 +66,22 @@ NSString *const kDemoNoteFilename = @"notes.bin";
         [self saveNotes];
         [self.tableView reloadRowsAtIndexPaths:@[self.editingNoteIndexPath] withRowAnimation:NO];
         self.editingNoteIndexPath = nil;
+    }
+}
+
+- (void)openRequestedNote:(NSNotification *)notification
+{
+    NSInteger requestedItemIndex = [[notification userInfo][noteRequestedIndex] integerValue];
+    if (requestedItemIndex < self.objects.count) {
+        [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:requestedItemIndex inSection:0] animated:NO scrollPosition:UITableViewScrollPositionTop];
+        
+        if ([[[self navigationController] visibleViewController] isKindOfClass:[DetailViewController class]]) {
+            DetailViewController *detailViewController = (DetailViewController *)[[self navigationController] visibleViewController];
+            DemoNote *requestedNote = self.objects[requestedItemIndex];
+            detailViewController.detailItem = requestedNote;
+        } else {
+            [self performSegueWithIdentifier:@"showDetail" sender:self];
+        }
     }
 }
 
@@ -123,7 +145,7 @@ NSString *const kDemoNoteFilename = @"notes.bin";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
-
+    
     DemoNote *object = self.objects[indexPath.row];
     cell.textLabel.text = [object text];
     return cell;
