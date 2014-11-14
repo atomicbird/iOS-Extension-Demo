@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EE9A19D81A16898800CBD6AD /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE9A19D71A16898800CBD6AD /* ShareViewController.m */; };
+		EE9A19DA1A16898800CBD6AD /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE9A19D91A16898800CBD6AD /* MainInterface.storyboard */; };
+		EE9A19DD1A16898800CBD6AD /* Share to Note.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = EE9A19D21A16898800CBD6AD /* Share to Note.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		EEDE71A21A141B9A007CD3D8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EEDE71A11A141B9A007CD3D8 /* main.m */; };
 		EEDE71A51A141B9A007CD3D8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EEDE71A41A141B9A007CD3D8 /* AppDelegate.m */; };
 		EEDE71A81A141B9A007CD3D8 /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEDE71A71A141B9A007CD3D8 /* MasterViewController.m */; };
@@ -30,6 +33,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		EE9A19DB1A16898800CBD6AD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EEDE71941A141B9A007CD3D8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EE9A19D11A16898800CBD6AD;
+			remoteInfo = "Share to Note";
+		};
 		EEDE71B91A141B9A007CD3D8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EEDE71941A141B9A007CD3D8 /* Project object */;
@@ -82,6 +92,7 @@
 			dstSubfolderSpec = 13;
 			files = (
 				EEDE71DD1A1560EC007CD3D8 /* DemoToday.appex in Embed App Extensions */,
+				EE9A19DD1A16898800CBD6AD /* Share to Note.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -100,6 +111,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		EE9A19D21A16898800CBD6AD /* Share to Note.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Share to Note.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EE9A19D51A16898800CBD6AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EE9A19D61A16898800CBD6AD /* ShareViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShareViewController.h; sourceTree = "<group>"; };
+		EE9A19D71A16898800CBD6AD /* ShareViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShareViewController.m; sourceTree = "<group>"; };
+		EE9A19D91A16898800CBD6AD /* MainInterface.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainInterface.storyboard; sourceTree = "<group>"; };
 		EEDE719C1A141B9A007CD3D8 /* DemoNotes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DemoNotes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EEDE71A01A141B9A007CD3D8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EEDE71A11A141B9A007CD3D8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -134,6 +150,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		EE9A19CF1A16898800CBD6AD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EEDE71991A141B9A007CD3D8 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -176,6 +199,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EE9A19D31A16898800CBD6AD /* Share to Note */ = {
+			isa = PBXGroup;
+			children = (
+				EE9A19D61A16898800CBD6AD /* ShareViewController.h */,
+				EE9A19D71A16898800CBD6AD /* ShareViewController.m */,
+				EE9A19D91A16898800CBD6AD /* MainInterface.storyboard */,
+				EE9A19D41A16898800CBD6AD /* Supporting Files */,
+			);
+			path = "Share to Note";
+			sourceTree = "<group>";
+		};
+		EE9A19D41A16898800CBD6AD /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				EE9A19D51A16898800CBD6AD /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		EEDE71931A141B9A007CD3D8 = {
 			isa = PBXGroup;
 			children = (
@@ -184,6 +226,7 @@
 				EEDE71D31A1560EC007CD3D8 /* DemoToday */,
 				EEDE71E81A156423007CD3D8 /* DemoSharedCode */,
 				EEDE71F71A156423007CD3D8 /* DemoSharedCodeTests */,
+				EE9A19D31A16898800CBD6AD /* Share to Note */,
 				EEDE71D01A1560EC007CD3D8 /* Frameworks */,
 				EEDE719D1A141B9A007CD3D8 /* Products */,
 			);
@@ -197,6 +240,7 @@
 				EEDE71CF1A1560EC007CD3D8 /* DemoToday.appex */,
 				EEDE71E71A156423007CD3D8 /* DemoSharedCode.framework */,
 				EEDE71F11A156423007CD3D8 /* DemoSharedCodeTests.xctest */,
+				EE9A19D21A16898800CBD6AD /* Share to Note.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -324,6 +368,23 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		EE9A19D11A16898800CBD6AD /* Share to Note */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EE9A19DE1A16898800CBD6AD /* Build configuration list for PBXNativeTarget "Share to Note" */;
+			buildPhases = (
+				EE9A19CE1A16898800CBD6AD /* Sources */,
+				EE9A19CF1A16898800CBD6AD /* Frameworks */,
+				EE9A19D01A16898800CBD6AD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Share to Note";
+			productName = "Share to Note";
+			productReference = EE9A19D21A16898800CBD6AD /* Share to Note.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		EEDE719B1A141B9A007CD3D8 /* DemoNotes */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = EEDE71C21A141B9A007CD3D8 /* Build configuration list for PBXNativeTarget "DemoNotes" */;
@@ -339,6 +400,7 @@
 			dependencies = (
 				EEDE71DC1A1560EC007CD3D8 /* PBXTargetDependency */,
 				EEDE71FD1A156423007CD3D8 /* PBXTargetDependency */,
+				EE9A19DC1A16898800CBD6AD /* PBXTargetDependency */,
 			);
 			name = DemoNotes;
 			productName = DemoNotes;
@@ -427,6 +489,10 @@
 				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = "Atomic Bird LLC";
 				TargetAttributes = {
+					EE9A19D11A16898800CBD6AD = {
+						CreatedOnToolsVersion = 6.1;
+						DevelopmentTeam = FZTVR399HK;
+					};
 					EEDE719B1A141B9A007CD3D8 = {
 						CreatedOnToolsVersion = 6.1;
 						DevelopmentTeam = FZTVR399HK;
@@ -476,11 +542,20 @@
 				EEDE71CE1A1560EC007CD3D8 /* DemoToday */,
 				EEDE71E61A156423007CD3D8 /* DemoSharedCode */,
 				EEDE71F01A156423007CD3D8 /* DemoSharedCodeTests */,
+				EE9A19D11A16898800CBD6AD /* Share to Note */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		EE9A19D01A16898800CBD6AD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EE9A19DA1A16898800CBD6AD /* MainInterface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EEDE719A1A141B9A007CD3D8 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -523,6 +598,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		EE9A19CE1A16898800CBD6AD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EE9A19D81A16898800CBD6AD /* ShareViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EEDE71981A141B9A007CD3D8 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -569,6 +652,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		EE9A19DC1A16898800CBD6AD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EE9A19D11A16898800CBD6AD /* Share to Note */;
+			targetProxy = EE9A19DB1A16898800CBD6AD /* PBXContainerItemProxy */;
+		};
 		EEDE71BA1A141B9A007CD3D8 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = EEDE719B1A141B9A007CD3D8 /* DemoNotes */;
@@ -621,6 +709,34 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		EE9A19DF1A16898800CBD6AD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "Share to Note/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		EE9A19E01A16898800CBD6AD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				INFOPLIST_FILE = "Share to Note/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 		EEDE71C01A141B9A007CD3D8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -870,6 +986,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		EE9A19DE1A16898800CBD6AD /* Build configuration list for PBXNativeTarget "Share to Note" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EE9A19DF1A16898800CBD6AD /* Debug */,
+				EE9A19E01A16898800CBD6AD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		EEDE71971A141B9A007CD3D8 /* Build configuration list for PBXProject "DemoNotes" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

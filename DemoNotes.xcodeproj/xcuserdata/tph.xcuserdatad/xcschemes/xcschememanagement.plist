@@ -19,9 +19,19 @@
 			<key>orderHint</key>
 			<integer>1</integer>
 		</dict>
+		<key>Share to Note.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>3</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>EE9A19D11A16898800CBD6AD</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>EEDE719B1A141B9A007CD3D8</key>
 		<dict>
 			<key>primary</key>
