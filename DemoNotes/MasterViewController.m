@@ -39,14 +39,7 @@ NSString *const kDemoNoteFilename = @"notes.bin";
     self.navigationItem.rightBarButtonItem = addButton;
     self.detailViewController = (DetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
     
-    NSData *savedData = [NSData dataWithContentsOfURL:[self demoNoteFileURL]];
-    if (savedData != nil) {
-        NSArray *savedObjects = [NSKeyedUnarchiver unarchiveObjectWithData:savedData];
-        if (savedObjects != nil) {
-            self.objects = [savedObjects mutableCopy];
-        }
-    }
-    
+    self.objects = [[self loadSavedNotes] mutableCopy];
     if (self.objects == nil) {
         self.objects = [NSMutableArray array];
     }
@@ -57,6 +50,10 @@ NSString *const kDemoNoteFilename = @"notes.bin";
                                              selector:@selector(openRequestedNote:)
                                                  name:noteRequestedNotification
                                                object:[[UIApplication sharedApplication] delegate]];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(applicationDidBecomeActive:)
+                                                 name:UIApplicationDidBecomeActiveNotification
+                                               object:[UIApplication sharedApplication]];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -85,6 +82,22 @@ NSString *const kDemoNoteFilename = @"notes.bin";
     }
 }
 
+- (void)applicationDidBecomeActive:(NSNotification *)unused
+{
+    NSArray *savedNotes = [self loadSavedNotes];
+    if (savedNotes.count > self.objects.count) {
+        NSInteger newNoteCount = savedNotes.count - self.objects.count;
+        NSArray *newNotes = [savedNotes subarrayWithRange:NSMakeRange(0, newNoteCount)];
+        [self.objects insertObjects:newNotes atIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, newNoteCount)]];
+        [self.tableView reloadData];
+        if (self.editingNoteIndexPath != nil) {
+            // If a note is currently being edited, update the editing index path.
+            // New notes always appear at the top of the list, so the editing index row increments by the number of new notes.
+            self.editingNoteIndexPath = [NSIndexPath indexPathForRow:self.editingNoteIndexPath.row+newNoteCount inSection:0];
+        }
+    }
+}
+
 - (NSURL *)demoNoteFileURL
 {
     NSURL *groupURL = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:@"group.com.atomicbird.demonotes"];
@@ -107,6 +120,17 @@ NSString *const kDemoNoteFilename = @"notes.bin";
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
     [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
     [self saveNotes];
+}
+
+- (NSArray *)loadSavedNotes
+{
+    NSData *savedData = [NSData dataWithContentsOfURL:[self demoNoteFileURL]];
+    NSArray *savedObjects = nil;
+    
+    if (savedData != nil) {
+        savedObjects = [NSKeyedUnarchiver unarchiveObjectWithData:savedData];
+    }
+    return savedObjects;
 }
 
 - (void)saveNotes
