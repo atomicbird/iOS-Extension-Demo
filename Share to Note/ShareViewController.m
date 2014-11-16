@@ -13,6 +13,7 @@
 NSString *const kDemoNoteFilename = @"notes.bin";
 
 @interface ShareViewController ()
+@property (weak, nonatomic) IBOutlet UITextView *textView;
 
 @end
 
@@ -51,6 +52,12 @@ NSString *const kDemoNoteFilename = @"notes.bin";
     
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.textView becomeFirstResponder];
+}
+
 - (NSURL *)demoNoteFileURL
 {
     NSURL *groupURL = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:@"group.com.atomicbird.demonotes"];
@@ -58,7 +65,7 @@ NSString *const kDemoNoteFilename = @"notes.bin";
     return fileURL;
 }
 
-- (void)didSelectPost {
+- (IBAction)createNote:(id)sender {
     // Load existing notes
     NSMutableArray *objects;
     
@@ -84,6 +91,10 @@ NSString *const kDemoNoteFilename = @"notes.bin";
 
     // Inform the host that we're done, so it un-blocks its UI. Note: Alternatively you could call super's -didSelectPost, which will similarly complete the extension context.
     [self.extensionContext completeRequestReturningItems:@[] completionHandler:nil];
+}
+
+- (IBAction)cancel:(id)sender {
+    [self.extensionContext cancelRequestWithError:nil];
 }
 
 - (NSArray *)configurationItems {

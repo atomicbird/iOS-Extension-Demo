@@ -1,26 +1,76 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="j1y-V4-xli">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Cls-Rm-MHW">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Share View Controller-->
-        <scene sceneID="ceB-am-kn3">
+        <scene sceneID="Le2-mw-WVC">
             <objects>
-                <viewController id="j1y-V4-xli" customClass="ShareViewController" customModuleProvider="" sceneMemberID="viewController">
+                <viewController id="Cls-Rm-MHW" customClass="ShareViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="8bI-gs-bmD"/>
-                        <viewControllerLayoutGuide type="bottom" id="d5i-Ba-RvD"/>
+                        <viewControllerLayoutGuide type="top" id="Vqh-Li-ZWH"/>
+                        <viewControllerLayoutGuide type="bottom" id="eLU-ff-hmG"/>
                     </layoutGuides>
-                    <view key="view" opaque="NO" contentMode="scaleToFill" id="wbc-yd-nQP">
+                    <view key="view" contentMode="scaleToFill" id="sYx-fN-D6s">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZJT-Ke-iLq">
+                                <rect key="frame" x="0.0" y="72" width="600" height="528"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rzG-oi-sSJ">
+                                <rect key="frame" x="0.0" y="20" width="600" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="Qwi-bF-98s"/>
+                                </constraints>
+                                <items>
+                                    <barButtonItem title="Cancel" id="e3W-im-XTx">
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <connections>
+                                            <action selector="cancel:" destination="Cls-Rm-MHW" id="hou-tu-KLV"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="qZc-iv-hth"/>
+                                    <barButtonItem title="Create Note" id="Tkc-r2-Ehd">
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <connections>
+                                            <action selector="createNote:" destination="Cls-Rm-MHW" id="KUe-F5-tqB"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                                <color key="barTintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </toolbar>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="ZJT-Ke-iLq" firstAttribute="top" secondItem="rzG-oi-sSJ" secondAttribute="bottom" constant="8" id="1qe-ct-Yj6"/>
+                            <constraint firstItem="rzG-oi-sSJ" firstAttribute="leading" secondItem="sYx-fN-D6s" secondAttribute="leadingMargin" constant="-16" id="33J-bV-UaB"/>
+                            <constraint firstItem="eLU-ff-hmG" firstAttribute="top" secondItem="rzG-oi-sSJ" secondAttribute="bottom" constant="528" id="6On-6h-sML"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="rzG-oi-sSJ" secondAttribute="trailing" constant="-16" id="6at-0O-ksd"/>
+                            <constraint firstItem="ZJT-Ke-iLq" firstAttribute="leading" secondItem="sYx-fN-D6s" secondAttribute="leadingMargin" constant="-16" id="Hdo-ds-guD"/>
+                            <constraint firstItem="rzG-oi-sSJ" firstAttribute="top" secondItem="Vqh-Li-ZWH" secondAttribute="bottom" id="UFs-bp-KUZ"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ZJT-Ke-iLq" secondAttribute="trailing" constant="-16" id="fvX-P2-1O1"/>
+                            <constraint firstItem="eLU-ff-hmG" firstAttribute="top" secondItem="ZJT-Ke-iLq" secondAttribute="bottom" id="xSo-fp-1Sj"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="6On-6h-sML"/>
+                            </mask>
+                        </variation>
                     </view>
+                    <connections>
+                        <outlet property="textView" destination="ZJT-Ke-iLq" id="vht-cw-zHU"/>
+                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="CEy-Cv-SGf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ITp-No-c6i" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="539" y="97"/>
+            <point key="canvasLocation" x="754" y="763"/>
         </scene>
     </scenes>
 </document>
