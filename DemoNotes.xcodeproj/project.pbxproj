@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EE578B1B1A182BCB00AD65E8 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = EE578B1A1A182BCB00AD65E8 /* LICENSE */; };
 		EE9A19D81A16898800CBD6AD /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE9A19D71A16898800CBD6AD /* ShareViewController.m */; };
 		EE9A19DA1A16898800CBD6AD /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE9A19D91A16898800CBD6AD /* MainInterface.storyboard */; };
 		EE9A19DD1A16898800CBD6AD /* Share to Note.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = EE9A19D21A16898800CBD6AD /* Share to Note.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -120,6 +121,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		EE578B191A18246300AD65E8 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		EE578B1A1A182BCB00AD65E8 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		EE9A19D21A16898800CBD6AD /* Share to Note.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Share to Note.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE9A19D51A16898800CBD6AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EE9A19D61A16898800CBD6AD /* ShareViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShareViewController.h; sourceTree = "<group>"; };
@@ -235,6 +238,8 @@
 		EEDE71931A141B9A007CD3D8 = {
 			isa = PBXGroup;
 			children = (
+				EE578B191A18246300AD65E8 /* README.md */,
+				EE578B1A1A182BCB00AD65E8 /* LICENSE */,
 				EEDE719E1A141B9A007CD3D8 /* DemoNotes */,
 				EEDE71BB1A141B9A007CD3D8 /* DemoNotesTests */,
 				EEDE71D31A1560EC007CD3D8 /* DemoToday */,
@@ -583,6 +588,7 @@
 			files = (
 				EEDE71AE1A141B9A007CD3D8 /* Main.storyboard in Resources */,
 				EEDE71B31A141B9A007CD3D8 /* LaunchScreen.xib in Resources */,
+				EE578B1B1A182BCB00AD65E8 /* LICENSE in Resources */,
 				EEDE71B01A141B9A007CD3D8 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
