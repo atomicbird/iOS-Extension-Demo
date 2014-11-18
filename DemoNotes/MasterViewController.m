@@ -18,6 +18,7 @@ NSString *const kDemoNoteFilename = @"notes.bin";
 @property (readwrite, strong) NSMutableArray *objects;
 @property (readwrite, strong) NSPredicate *hasChangesPredicate;
 @property (readwrite, strong) NSIndexPath *editingNoteIndexPath;
+@property (readwrite, assign) BOOL forceSaveNeeded;
 @end
 
 @implementation MasterViewController
@@ -136,10 +137,11 @@ NSString *const kDemoNoteFilename = @"notes.bin";
 - (void)saveNotes
 {
     NSArray *changedObjects = [self.objects filteredArrayUsingPredicate:self.hasChangesPredicate];
-    if (changedObjects.count > 0) {
+    if ((changedObjects.count > 0) || self.forceSaveNeeded) {
         NSData *saveData = [NSKeyedArchiver archivedDataWithRootObject:self.objects];
         [saveData writeToURL:[self demoNoteFileURL] atomically:YES];
         [changedObjects makeObjectsPerformSelector:@selector(setHasChanges:) withObject:@NO];
+        self.forceSaveNeeded = NO;
     }
 }
 
@@ -184,6 +186,7 @@ NSString *const kDemoNoteFilename = @"notes.bin";
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         [self.objects removeObjectAtIndex:indexPath.row];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        self.forceSaveNeeded = YES;
         [self saveNotes];
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
