@@ -12,7 +12,7 @@
 
 NSString *const kDemoNoteFilename = @"notes.bin";
 
-@interface TodayViewController () <NCWidgetProviding>
+@interface TodayViewController () <NCWidgetProviding, NSFilePresenter>
 
 @property (readwrite, strong) NSMutableArray *objects;
 
@@ -23,19 +23,24 @@ NSString *const kDemoNoteFilename = @"notes.bin";
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    NSURL *groupURL = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:@"group.com.atomicbird.demonotes"];
-    NSURL *fileURL = [groupURL URLByAppendingPathComponent:kDemoNoteFilename];
-    
-    NSData *savedData = [NSData dataWithContentsOfURL:fileURL];
-    if (savedData != nil) {
-        NSArray *savedObjects = [NSKeyedUnarchiver unarchiveObjectWithData:savedData];
-        if (savedObjects != nil) {
-            self.objects = [savedObjects mutableCopy];
+    NSFileCoordinator *fileCoordinator = [[NSFileCoordinator alloc] initWithFilePresenter:self];
+    NSError *fileCoordinatorError = nil;
+    __weak typeof(self) weakSelf = self;
+    [fileCoordinator coordinateReadingItemAtURL:[self presentedItemURL] options:0 error:&fileCoordinatorError byAccessor:^(NSURL *newURL) {
+        NSData *savedData = [NSData dataWithContentsOfURL:newURL];
+        if (savedData != nil) {
+            NSArray *savedObjects = [NSKeyedUnarchiver unarchiveObjectWithData:savedData];
+            if (savedObjects != nil) {
+                weakSelf.objects = [savedObjects mutableCopy];
+            }
         }
-    }
-    
-    if (self.objects == nil) {
-        self.objects = [NSMutableArray array];
+        
+        if (weakSelf.objects == nil) {
+            weakSelf.objects = [NSMutableArray array];
+        }
+    }];
+    if (fileCoordinatorError != nil) {
+        NSLog(@"Error loading notes: %@", [fileCoordinatorError localizedDescription]);
     }
 
     self.preferredContentSize = CGSizeMake(self.preferredContentSize.width, self.objects.count * 44.0 /* self.tableView.rowHeight*/);
@@ -54,6 +59,26 @@ NSString *const kDemoNoteFilename = @"notes.bin";
     // If there's an update, use NCUpdateResultNewData
 
     completionHandler(NCUpdateResultNewData);
+}
+
+#pragma mark - NSFilePresenter
+- (NSURL *)presentedItemURL
+{
+    NSURL *groupURL = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:@"group.com.atomicbird.demonotes"];
+    NSURL *fileURL = [groupURL URLByAppendingPathComponent:kDemoNoteFilename];
+    return fileURL;
+}
+
+- (NSOperationQueue *)presentedItemOperationQueue
+{
+    return [NSOperationQueue mainQueue];
+}
+
+- (void)presentedItemDidChange
+{
+    // This could be used to update the today view to show new or changed notes.
+    // In this app it's not needed because new notes can't be created while the today extension is visible--
+    // meaning that there's never a situation where this method would be useful.
 }
 
 #pragma mark - Table View

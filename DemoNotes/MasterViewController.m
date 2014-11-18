@@ -13,7 +13,7 @@
 
 NSString *const kDemoNoteFilename = @"notes.bin";
 
-@interface MasterViewController ()
+@interface MasterViewController () <NSFilePresenter>
 
 @property (readwrite, strong) NSMutableArray *objects;
 @property (readwrite, strong) NSPredicate *hasChangesPredicate;
@@ -39,7 +39,9 @@ NSString *const kDemoNoteFilename = @"notes.bin";
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
     self.navigationItem.rightBarButtonItem = addButton;
     self.detailViewController = (DetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
-    
+
+    [NSFileCoordinator addFilePresenter:self];
+
     self.objects = [[self loadSavedNotes] mutableCopy];
     if (self.objects == nil) {
         self.objects = [NSMutableArray array];
@@ -51,10 +53,6 @@ NSString *const kDemoNoteFilename = @"notes.bin";
                                              selector:@selector(openRequestedNote:)
                                                  name:noteRequestedNotification
                                                object:[[UIApplication sharedApplication] delegate]];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(applicationDidBecomeActive:)
-                                                 name:UIApplicationDidBecomeActiveNotification
-                                               object:[UIApplication sharedApplication]];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -79,22 +77,6 @@ NSString *const kDemoNoteFilename = @"notes.bin";
             detailViewController.detailItem = requestedNote;
         } else {
             [self performSegueWithIdentifier:@"showDetail" sender:self];
-        }
-    }
-}
-
-- (void)applicationDidBecomeActive:(NSNotification *)unused
-{
-    NSArray *savedNotes = [self loadSavedNotes];
-    if (savedNotes.count > self.objects.count) {
-        NSInteger newNoteCount = savedNotes.count - self.objects.count;
-        NSArray *newNotes = [savedNotes subarrayWithRange:NSMakeRange(0, newNoteCount)];
-        [self.objects insertObjects:newNotes atIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, newNoteCount)]];
-        [self.tableView reloadData];
-        if (self.editingNoteIndexPath != nil) {
-            // If a note is currently being edited, update the editing index path.
-            // New notes always appear at the top of the list, so the editing index row increments by the number of new notes.
-            self.editingNoteIndexPath = [NSIndexPath indexPathForRow:self.editingNoteIndexPath.row+newNoteCount inSection:0];
         }
     }
 }
@@ -125,23 +107,72 @@ NSString *const kDemoNoteFilename = @"notes.bin";
 
 - (NSArray *)loadSavedNotes
 {
-    NSData *savedData = [NSData dataWithContentsOfURL:[self demoNoteFileURL]];
-    NSArray *savedObjects = nil;
+    NSFileCoordinator *fileCoordinator = [[NSFileCoordinator alloc] initWithFilePresenter:self];
+    NSError *fileCoordinatorError = nil;
+    __block NSArray *savedNotes = nil;
     
-    if (savedData != nil) {
-        savedObjects = [NSKeyedUnarchiver unarchiveObjectWithData:savedData];
+    [fileCoordinator coordinateReadingItemAtURL:[self demoNoteFileURL] options:0 error:&fileCoordinatorError byAccessor:^(NSURL *newURL) {
+        NSData *savedData = [NSData dataWithContentsOfURL:newURL];
+        
+        if (savedData != nil) {
+            savedNotes = [NSKeyedUnarchiver unarchiveObjectWithData:savedData];
+        }
+    }];
+    if (fileCoordinatorError != nil) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Load error" message:[fileCoordinatorError localizedDescription] preferredStyle:UIAlertControllerStyleAlert];
+        [self presentViewController:alert animated:YES completion:nil];
     }
-    return savedObjects;
+    
+    return savedNotes;
 }
 
 - (void)saveNotes
 {
     NSArray *changedObjects = [self.objects filteredArrayUsingPredicate:self.hasChangesPredicate];
     if ((changedObjects.count > 0) || self.forceSaveNeeded) {
-        NSData *saveData = [NSKeyedArchiver archivedDataWithRootObject:self.objects];
-        [saveData writeToURL:[self demoNoteFileURL] atomically:YES];
-        [changedObjects makeObjectsPerformSelector:@selector(setHasChanges:) withObject:@NO];
-        self.forceSaveNeeded = NO;
+        NSFileCoordinator *fileCoordinator = [[NSFileCoordinator alloc] initWithFilePresenter:self];
+        __weak typeof(self) weakSelf = self;
+        NSError *fileCoordinatorError = nil;
+        
+        [fileCoordinator coordinateWritingItemAtURL:[self demoNoteFileURL] options:NSFileCoordinatorWritingForReplacing error:&fileCoordinatorError byAccessor:^(NSURL *newURL) {
+            NSData *saveData = [NSKeyedArchiver archivedDataWithRootObject:weakSelf.objects];
+            [saveData writeToURL:newURL atomically:YES];
+            [changedObjects makeObjectsPerformSelector:@selector(setHasChanges:) withObject:@NO];
+            weakSelf.forceSaveNeeded = NO;
+        }];
+        if (fileCoordinatorError != nil) {
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Save error" message:[fileCoordinatorError localizedDescription] preferredStyle:UIAlertControllerStyleAlert];
+            [self presentViewController:alert animated:YES completion:nil];
+        }
+    }
+}
+
+#pragma mark - NSFilePresenter
+- (NSURL *)presentedItemURL
+{
+    return [self demoNoteFileURL];
+}
+
+- (NSOperationQueue *)presentedItemOperationQueue
+{
+    return [NSOperationQueue mainQueue];
+}
+
+- (void)presentedItemDidChange
+{
+    NSArray *savedNotes = [self loadSavedNotes];
+    
+    if (savedNotes.count > self.objects.count) {
+        NSInteger newNoteCount = savedNotes.count - self.objects.count;
+        NSArray *newNotes = [savedNotes subarrayWithRange:NSMakeRange(0, newNoteCount)];
+        [self.objects insertObjects:newNotes atIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, newNoteCount)]];
+        
+        if (self.editingNoteIndexPath != nil) {
+            // If a note is currently being edited, update the editing index path.
+            // New notes always appear at the top of the list, so the editing index row increments by the number of new notes.
+            self.editingNoteIndexPath = [NSIndexPath indexPathForRow:self.editingNoteIndexPath.row+newNoteCount inSection:0];
+        }
+        [self.tableView reloadData];
     }
 }
 
