@@ -14,8 +14,8 @@ NSString *const kDemoNoteFilename = @"notes.bin";
 
 @interface TodayViewController () <NCWidgetProviding, NSFilePresenter>
 
-@property (readwrite, strong) NSMutableArray *objects;
-
+@property (readwrite, strong) NSArray *objects;
+@property (readwrite, strong) NSManagedObjectContext *managedObjectContext;
 @end
 
 @implementation TodayViewController
@@ -23,25 +23,14 @@ NSString *const kDemoNoteFilename = @"notes.bin";
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    NSFileCoordinator *fileCoordinator = [[NSFileCoordinator alloc] initWithFilePresenter:self];
-    NSError *fileCoordinatorError = nil;
-    __weak typeof(self) weakSelf = self;
-    [fileCoordinator coordinateReadingItemAtURL:[self presentedItemURL] options:0 error:&fileCoordinatorError byAccessor:^(NSURL *newURL) {
-        NSData *savedData = [NSData dataWithContentsOfURL:newURL];
-        if (savedData != nil) {
-            NSArray *savedObjects = [NSKeyedUnarchiver unarchiveObjectWithData:savedData];
-            if (savedObjects != nil) {
-                weakSelf.objects = [savedObjects mutableCopy];
-            }
-        }
-        
-        if (weakSelf.objects == nil) {
-            weakSelf.objects = [NSMutableArray array];
-        }
-    }];
-    if (fileCoordinatorError != nil) {
-        NSLog(@"Error loading notes: %@", [fileCoordinatorError localizedDescription]);
-    }
+    self.managedObjectContext = [[DemoNoteManager sharedManager] createManagedObjectContextWithConcurrencyType:NSMainQueueConcurrencyType];
+    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"DemoNote"];
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:NO];
+    [fetchRequest setSortDescriptors:@[sortDescriptor]];
+    
+    NSError *fetchError = nil;
+    NSArray *fetchedObjects = [self.managedObjectContext executeFetchRequest:fetchRequest error:&fetchError];
+    self.objects = fetchedObjects;
 
     self.preferredContentSize = CGSizeMake(self.preferredContentSize.width, self.objects.count * 44.0 /* self.tableView.rowHeight*/);
 }

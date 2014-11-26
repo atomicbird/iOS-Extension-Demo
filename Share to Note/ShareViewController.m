@@ -60,47 +60,13 @@ NSString *const kDemoNoteFilename = @"notes.bin";
 }
 
 - (IBAction)createNote:(id)sender {
-    NSFileCoordinator *fileCoordinator = [[NSFileCoordinator alloc] initWithFilePresenter:self];
-    NSError *coordinatedReadError = nil;
-    __weak typeof(self) weakSelf = self;
+    NSManagedObjectContext *context = [[DemoNoteManager sharedManager] createManagedObjectContextWithConcurrencyType:NSMainQueueConcurrencyType];
+    DemoNote *newNote = [NSEntityDescription insertNewObjectForEntityForName:@"DemoNote" inManagedObjectContext:context];
+    [newNote setText:self.textView.text];
     
-    [fileCoordinator coordinateReadingItemAtURL:[self presentedItemURL] options:0 writingItemAtURL:[self presentedItemURL] options:NSFileCoordinatorWritingForReplacing error:&coordinatedReadError byAccessor:^(NSURL *newReadingURL, NSURL *newWritingURL) {
-        // Read existing notes
-        NSMutableArray *objects;
-        NSData *savedData = [NSData dataWithContentsOfURL:[weakSelf presentedItemURL]];
-        if (savedData != nil) {
-            NSArray *savedObjects = [NSKeyedUnarchiver unarchiveObjectWithData:savedData];
-            if (savedObjects != nil) {
-                objects = [savedObjects mutableCopy];
-            }
-        }
-        
-        if (objects == nil) {
-            objects = [NSMutableArray array];
-        }
-
-        // Create a new note with the current text
-        DemoNote *newNote = [[DemoNote alloc] initWithText:weakSelf.textView.text];
-        [objects insertObject:newNote atIndex:0];
-        
-        // Save notes back to the file
-        NSError *coordinatedWriteError = nil;
-        [fileCoordinator coordinateWritingItemAtURL:newWritingURL options:0 error:&coordinatedWriteError byAccessor:^(NSURL *newURL) {
-            NSData *saveData = [NSKeyedArchiver archivedDataWithRootObject:objects];
-            [saveData writeToURL:[weakSelf presentedItemURL] atomically:YES];
-            
-            // Inform the host that we're done, so it un-blocks its UI. Note: Alternatively you could call super's -didSelectPost, which will similarly complete the extension context.
-            [weakSelf.extensionContext completeRequestReturningItems:@[] completionHandler:nil];
-        }];
-        
-        if (coordinatedWriteError != nil) {
-            NSLog(@"Error saving notes: %@", [coordinatedWriteError localizedDescription]);
-        }
-    }];
+    [[DemoNoteManager sharedManager] saveManagedObjectContextWithPresenterNotification:context];
     
-    if (coordinatedReadError != nil) {
-        NSLog(@"Error reading notes: %@" ,[coordinatedReadError localizedDescription]);
-    }
+    [self.extensionContext completeRequestReturningItems:nil completionHandler:nil];
 }
 
 - (IBAction)cancel:(id)sender {

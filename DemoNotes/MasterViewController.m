@@ -13,12 +13,11 @@
 
 NSString *const kDemoNoteFilename = @"notes.bin";
 
-@interface MasterViewController () <NSFilePresenter>
+@interface MasterViewController () <NSFilePresenter, NSFetchedResultsControllerDelegate>
 
-@property (readwrite, strong) NSMutableArray *objects;
-@property (readwrite, strong) NSPredicate *hasChangesPredicate;
 @property (readwrite, strong) NSIndexPath *editingNoteIndexPath;
-@property (readwrite, assign) BOOL forceSaveNeeded;
+@property (readwrite, strong) NSManagedObjectContext *managedObjectContext;
+@property (readwrite, strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 @end
 
 @implementation MasterViewController
@@ -39,16 +38,12 @@ NSString *const kDemoNoteFilename = @"notes.bin";
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
     self.navigationItem.rightBarButtonItem = addButton;
     self.detailViewController = (DetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
+    
+    DemoNoteManager *sharedManager = [DemoNoteManager sharedManager];
+    self.managedObjectContext = [sharedManager createManagedObjectContextWithConcurrencyType:NSMainQueueConcurrencyType];
 
     [NSFileCoordinator addFilePresenter:self];
 
-    self.objects = [[self loadSavedNotes] mutableCopy];
-    if (self.objects == nil) {
-        self.objects = [NSMutableArray array];
-    }
-    
-    _hasChangesPredicate = [NSPredicate predicateWithFormat:@"hasChanges = YES"];
-    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(openRequestedNote:)
                                                  name:noteRequestedNotification
@@ -60,7 +55,6 @@ NSString *const kDemoNoteFilename = @"notes.bin";
     [super viewWillAppear:animated];
     if (self.editingNoteIndexPath != nil) {
         [self saveNotes];
-        [self.tableView reloadRowsAtIndexPaths:@[self.editingNoteIndexPath] withRowAnimation:NO];
         self.editingNoteIndexPath = nil;
     }
 }
@@ -68,17 +62,38 @@ NSString *const kDemoNoteFilename = @"notes.bin";
 - (void)openRequestedNote:(NSNotification *)notification
 {
     NSInteger requestedItemIndex = [[notification userInfo][noteRequestedIndex] integerValue];
-    if (requestedItemIndex < self.objects.count) {
+    if (requestedItemIndex < [[self.fetchedResultsController fetchedObjects] count]) {
         [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:requestedItemIndex inSection:0] animated:NO scrollPosition:UITableViewScrollPositionTop];
         
         if ([[[self navigationController] visibleViewController] isKindOfClass:[DetailViewController class]]) {
             DetailViewController *detailViewController = (DetailViewController *)[[self navigationController] visibleViewController];
-            DemoNote *requestedNote = self.objects[requestedItemIndex];
+            DemoNote *requestedNote = [self.fetchedResultsController fetchedObjects][requestedItemIndex];
             detailViewController.detailItem = requestedNote;
         } else {
             [self performSegueWithIdentifier:@"showDetail" sender:self];
         }
     }
+}
+
+- (NSFetchedResultsController *)fetchedResultsController
+{
+    if (_fetchedResultsController == nil) {
+        NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"DemoNote"];
+        NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:NO];
+        [fetchRequest setSortDescriptors:@[sortDescriptor]];
+        
+        _fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
+                                                                        managedObjectContext:self.managedObjectContext
+                                                                          sectionNameKeyPath:nil
+                                                                                   cacheName:nil];
+        _fetchedResultsController.delegate = self;
+        
+        NSError *fetchError = nil;
+        if (![_fetchedResultsController performFetch:&fetchError]) {
+            NSLog(@"Error performing fetch: %@", fetchError);
+        }
+    }
+    return _fetchedResultsController;
 }
 
 - (NSURL *)demoNoteFileURL
@@ -94,63 +109,25 @@ NSString *const kDemoNoteFilename = @"notes.bin";
 }
 
 - (void)insertNewObject:(id)sender {
-    if (!self.objects) {
-        self.objects = [[NSMutableArray alloc] init];
-    }
-    NSString *newNoteTitle = [NSString stringWithFormat:@"Note %lu", (unsigned long)[self.objects count]];
-    DemoNote *newNote = [[DemoNote alloc] initWithText:newNoteTitle];
-    [self.objects insertObject:newNote atIndex:0];
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-    [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    NSString *newNoteTitle = [NSString stringWithFormat:@"Note %lu", (unsigned long)[[self.fetchedResultsController fetchedObjects] count]];
+    DemoNote *newNote = [NSEntityDescription insertNewObjectForEntityForName:@"DemoNote" inManagedObjectContext:self.managedObjectContext];
+    [newNote setText:newNoteTitle];
     [self saveNotes];
-}
-
-- (NSArray *)loadSavedNotes
-{
-    NSFileCoordinator *fileCoordinator = [[NSFileCoordinator alloc] initWithFilePresenter:self];
-    NSError *fileCoordinatorError = nil;
-    __block NSArray *savedNotes = nil;
-    
-    [fileCoordinator coordinateReadingItemAtURL:[self demoNoteFileURL] options:0 error:&fileCoordinatorError byAccessor:^(NSURL *newURL) {
-        NSData *savedData = [NSData dataWithContentsOfURL:newURL];
-        
-        if (savedData != nil) {
-            savedNotes = [NSKeyedUnarchiver unarchiveObjectWithData:savedData];
-        }
-    }];
-    if (fileCoordinatorError != nil) {
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Load error" message:[fileCoordinatorError localizedDescription] preferredStyle:UIAlertControllerStyleAlert];
-        [self presentViewController:alert animated:YES completion:nil];
-    }
-    
-    return savedNotes;
 }
 
 - (void)saveNotes
 {
-    NSArray *changedObjects = [self.objects filteredArrayUsingPredicate:self.hasChangesPredicate];
-    if ((changedObjects.count > 0) || self.forceSaveNeeded) {
-        NSFileCoordinator *fileCoordinator = [[NSFileCoordinator alloc] initWithFilePresenter:self];
-        __weak typeof(self) weakSelf = self;
-        NSError *fileCoordinatorError = nil;
-        
-        [fileCoordinator coordinateWritingItemAtURL:[self demoNoteFileURL] options:NSFileCoordinatorWritingForReplacing error:&fileCoordinatorError byAccessor:^(NSURL *newURL) {
-            NSData *saveData = [NSKeyedArchiver archivedDataWithRootObject:weakSelf.objects];
-            [saveData writeToURL:newURL atomically:YES];
-            [changedObjects makeObjectsPerformSelector:@selector(setHasChanges:) withObject:@NO];
-            weakSelf.forceSaveNeeded = NO;
-        }];
-        if (fileCoordinatorError != nil) {
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Save error" message:[fileCoordinatorError localizedDescription] preferredStyle:UIAlertControllerStyleAlert];
-            [self presentViewController:alert animated:YES completion:nil];
-        }
+    NSError *saveError = nil;
+    if (![self.managedObjectContext save:&saveError]) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Save error" message:[saveError localizedDescription] preferredStyle:UIAlertControllerStyleAlert];
+        [self presentViewController:alert animated:YES completion:nil];
     }
 }
 
 #pragma mark - NSFilePresenter
 - (NSURL *)presentedItemURL
 {
-    return [self demoNoteFileURL];
+    return [[DemoNoteManager sharedManager] presenterNotificationFileURL];
 }
 
 - (NSOperationQueue *)presentedItemOperationQueue
@@ -160,20 +137,54 @@ NSString *const kDemoNoteFilename = @"notes.bin";
 
 - (void)presentedItemDidChange
 {
-    NSArray *savedNotes = [self loadSavedNotes];
-    
-    if (savedNotes.count > self.objects.count) {
-        NSInteger newNoteCount = savedNotes.count - self.objects.count;
-        NSArray *newNotes = [savedNotes subarrayWithRange:NSMakeRange(0, newNoteCount)];
-        [self.objects insertObjects:newNotes atIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, newNoteCount)]];
-        
-        if (self.editingNoteIndexPath != nil) {
-            // If a note is currently being edited, update the editing index path.
-            // New notes always appear at the top of the list, so the editing index row increments by the number of new notes.
-            self.editingNoteIndexPath = [NSIndexPath indexPathForRow:self.editingNoteIndexPath.row+newNoteCount inSection:0];
-        }
-        [self.tableView reloadData];
+    NSError *fetchError = nil;
+    if (![self.fetchedResultsController performFetch:&fetchError]) {
+        NSLog(@"Fetch error: %@", fetchError);
     }
+    [self.tableView reloadData];
+}
+
+#pragma mark - NSFetchedResultsControllerDelegate
+- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
+{
+    NSLog(@"FRC will change content");
+    [self.tableView beginUpdates];
+}
+
+- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath
+{
+    switch (type) {
+        case NSFetchedResultsChangeInsert:
+        {
+            [self.tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+        }
+        case NSFetchedResultsChangeDelete:
+        {
+            [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+        }
+        case NSFetchedResultsChangeUpdate:
+        {
+            [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+        }
+        case NSFetchedResultsChangeMove:
+        {
+            [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            [self.tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+        }
+            
+        default:
+            break;
+    }
+}
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
+{
+    NSLog(@"FRC content changed");
+    [self.tableView endUpdates];
 }
 
 #pragma mark - Segues
@@ -181,7 +192,7 @@ NSString *const kDemoNoteFilename = @"notes.bin";
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString:@"showDetail"]) {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        DemoNote *object = self.objects[indexPath.row];
+        DemoNote *object = [self.fetchedResultsController objectAtIndexPath:indexPath];
         DetailViewController *controller = (DetailViewController *)[[segue destinationViewController] topViewController];
         [controller setDetailItem:object];
         controller.navigationItem.leftBarButtonItem = self.splitViewController.displayModeButtonItem;
@@ -197,13 +208,13 @@ NSString *const kDemoNoteFilename = @"notes.bin";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.objects.count;
+    return [[self.fetchedResultsController fetchedObjects] count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     
-    DemoNote *object = self.objects[indexPath.row];
+    DemoNote *object = [self.fetchedResultsController objectAtIndexPath:indexPath];
     cell.textLabel.text = [object text];
     return cell;
 }
@@ -215,9 +226,8 @@ NSString *const kDemoNoteFilename = @"notes.bin";
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        [self.objects removeObjectAtIndex:indexPath.row];
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-        self.forceSaveNeeded = YES;
+        DemoNote *object = [self.fetchedResultsController objectAtIndexPath:indexPath];
+        [self.managedObjectContext deleteObject:object];
         [self saveNotes];
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.

@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EE55A10C1A25173800EA5E1B /* DemoNotes.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EE55A10A1A25173800EA5E1B /* DemoNotes.xcdatamodeld */; };
+		EE55A1471A25240800EA5E1B /* DemoNoteManager.h in Headers */ = {isa = PBXBuildFile; fileRef = EE55A1451A25240800EA5E1B /* DemoNoteManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EE55A1481A25240800EA5E1B /* DemoNoteManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EE55A1461A25240800EA5E1B /* DemoNoteManager.m */; };
+		EE55A14B1A2528F500EA5E1B /* DemoNote.h in Headers */ = {isa = PBXBuildFile; fileRef = EE55A1491A2528F500EA5E1B /* DemoNote.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EE55A14C1A2528F500EA5E1B /* DemoNote.m in Sources */ = {isa = PBXBuildFile; fileRef = EE55A14A1A2528F500EA5E1B /* DemoNote.m */; };
 		EE578B1B1A182BCB00AD65E8 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = EE578B1A1A182BCB00AD65E8 /* LICENSE */; };
 		EE9A19D81A16898800CBD6AD /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE9A19D71A16898800CBD6AD /* ShareViewController.m */; };
 		EE9A19DA1A16898800CBD6AD /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE9A19D91A16898800CBD6AD /* MainInterface.storyboard */; };
@@ -30,8 +35,6 @@
 		EEDE71FB1A156423007CD3D8 /* DemoSharedCodeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EEDE71FA1A156423007CD3D8 /* DemoSharedCodeTests.m */; };
 		EEDE71FE1A156423007CD3D8 /* DemoSharedCode.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEDE71E71A156423007CD3D8 /* DemoSharedCode.framework */; };
 		EEDE71FF1A156423007CD3D8 /* DemoSharedCode.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EEDE71E71A156423007CD3D8 /* DemoSharedCode.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		EEDE72071A15642B007CD3D8 /* DemoNote.m in Sources */ = {isa = PBXBuildFile; fileRef = EEDE71C91A141E46007CD3D8 /* DemoNote.m */; };
-		EEDE72081A1564D6007CD3D8 /* DemoNote.h in Headers */ = {isa = PBXBuildFile; fileRef = EEDE71C81A141E46007CD3D8 /* DemoNote.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EEDE720D1A1570D2007CD3D8 /* DemoSharedCode.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEDE71E71A156423007CD3D8 /* DemoSharedCode.framework */; };
 /* End PBXBuildFile section */
 
@@ -121,6 +124,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		EE55A10B1A25173800EA5E1B /* DemoNotes.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DemoNotes.xcdatamodel; sourceTree = "<group>"; };
+		EE55A1451A25240800EA5E1B /* DemoNoteManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoNoteManager.h; sourceTree = "<group>"; };
+		EE55A1461A25240800EA5E1B /* DemoNoteManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoNoteManager.m; sourceTree = "<group>"; };
+		EE55A1491A2528F500EA5E1B /* DemoNote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoNote.h; sourceTree = "<group>"; };
+		EE55A14A1A2528F500EA5E1B /* DemoNote.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoNote.m; sourceTree = "<group>"; };
 		EE578B191A18246300AD65E8 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		EE578B1A1A182BCB00AD65E8 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		EE9A19D21A16898800CBD6AD /* Share to Note.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Share to Note.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -145,8 +153,6 @@
 		EEDE71B81A141B9A007CD3D8 /* DemoNotesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DemoNotesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EEDE71BD1A141B9A007CD3D8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EEDE71BE1A141B9A007CD3D8 /* DemoNotesTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DemoNotesTests.m; sourceTree = "<group>"; };
-		EEDE71C81A141E46007CD3D8 /* DemoNote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoNote.h; sourceTree = "<group>"; };
-		EEDE71C91A141E46007CD3D8 /* DemoNote.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoNote.m; sourceTree = "<group>"; };
 		EEDE71CF1A1560EC007CD3D8 /* DemoToday.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = DemoToday.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		EEDE71D11A1560EC007CD3D8 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		EEDE71D51A1560EC007CD3D8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -278,8 +284,6 @@
 				EEDE71AF1A141B9A007CD3D8 /* Images.xcassets */,
 				EEDE71B11A141B9A007CD3D8 /* LaunchScreen.xib */,
 				EEDE719F1A141B9A007CD3D8 /* Supporting Files */,
-				EEDE71C81A141E46007CD3D8 /* DemoNote.h */,
-				EEDE71C91A141E46007CD3D8 /* DemoNote.m */,
 			);
 			path = DemoNotes;
 			sourceTree = "<group>";
@@ -343,6 +347,11 @@
 			children = (
 				EEDE71EB1A156423007CD3D8 /* DemoSharedCode.h */,
 				EEDE71E91A156423007CD3D8 /* Supporting Files */,
+				EE55A10A1A25173800EA5E1B /* DemoNotes.xcdatamodeld */,
+				EE55A1491A2528F500EA5E1B /* DemoNote.h */,
+				EE55A14A1A2528F500EA5E1B /* DemoNote.m */,
+				EE55A1451A25240800EA5E1B /* DemoNoteManager.h */,
+				EE55A1461A25240800EA5E1B /* DemoNoteManager.m */,
 			);
 			path = DemoSharedCode;
 			sourceTree = "<group>";
@@ -380,7 +389,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				EEDE71EC1A156423007CD3D8 /* DemoSharedCode.h in Headers */,
-				EEDE72081A1564D6007CD3D8 /* DemoNote.h in Headers */,
+				EE55A1471A25240800EA5E1B /* DemoNoteManager.h in Headers */,
+				EE55A14B1A2528F500EA5E1B /* DemoNote.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -664,7 +674,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EEDE72071A15642B007CD3D8 /* DemoNote.m in Sources */,
+				EE55A14C1A2528F500EA5E1B /* DemoNote.m in Sources */,
+				EE55A10C1A25173800EA5E1B /* DemoNotes.xcdatamodeld in Sources */,
+				EE55A1481A25240800EA5E1B /* DemoNoteManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1086,6 +1098,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		EE55A10A1A25173800EA5E1B /* DemoNotes.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				EE55A10B1A25173800EA5E1B /* DemoNotes.xcdatamodel */,
+			);
+			currentVersion = EE55A10B1A25173800EA5E1B /* DemoNotes.xcdatamodel */;
+			path = DemoNotes.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = EEDE71941A141B9A007CD3D8 /* Project object */;
 }

@@ -18,3 +18,4 @@ FOUNDATION_EXPORT const unsigned char DemoSharedCodeVersionString[];
 
 
 #import <DemoSharedCode/DemoNote.h>
+#import <DemoSharedCode/DemoNoteManager.h>
