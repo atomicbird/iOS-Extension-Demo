@@ -13,7 +13,7 @@
 
 NSString *const kDemoNoteFilename = @"notes.bin";
 
-@interface MasterViewController () <NSFilePresenter, NSFetchedResultsControllerDelegate>
+@interface MasterViewController () <NSFetchedResultsControllerDelegate>
 
 @property (readwrite, strong) NSIndexPath *editingNoteIndexPath;
 @property (readwrite, strong) NSManagedObjectContext *managedObjectContext;
@@ -40,9 +40,13 @@ NSString *const kDemoNoteFilename = @"notes.bin";
     self.detailViewController = (DetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
     
     DemoNoteManager *sharedManager = [DemoNoteManager sharedManager];
+    [sharedManager startObservingChangeNotifications];
     self.managedObjectContext = [sharedManager createManagedObjectContextWithConcurrencyType:NSMainQueueConcurrencyType];
 
-    [NSFileCoordinator addFilePresenter:self];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(persistentStoreDidSave:)
+                                                 name:kDemoNotesSaveByAppNotification
+                                               object:[DemoNoteManager sharedManager]];
 
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(openRequestedNote:)
@@ -73,6 +77,15 @@ NSString *const kDemoNoteFilename = @"notes.bin";
             [self performSegueWithIdentifier:@"showDetail" sender:self];
         }
     }
+}
+
+- (void)persistentStoreDidSave:(NSNotification *)unused
+{
+    NSError *fetchError = nil;
+    if (![self.fetchedResultsController performFetch:&fetchError]) {
+        NSLog(@"Fetch error: %@", fetchError);
+    }
+    [self.tableView reloadData];
 }
 
 - (NSFetchedResultsController *)fetchedResultsController
@@ -118,30 +131,10 @@ NSString *const kDemoNoteFilename = @"notes.bin";
 - (void)saveNotes
 {
     NSError *saveError = nil;
-    if (![self.managedObjectContext save:&saveError]) {
+    if (![[DemoNoteManager sharedManager] saveManagedObjectContextWithNotification:self.managedObjectContext error:&saveError]) {
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Save error" message:[saveError localizedDescription] preferredStyle:UIAlertControllerStyleAlert];
         [self presentViewController:alert animated:YES completion:nil];
     }
-}
-
-#pragma mark - NSFilePresenter
-- (NSURL *)presentedItemURL
-{
-    return [[DemoNoteManager sharedManager] presenterNotificationFileURL];
-}
-
-- (NSOperationQueue *)presentedItemOperationQueue
-{
-    return [NSOperationQueue mainQueue];
-}
-
-- (void)presentedItemDidChange
-{
-    NSError *fetchError = nil;
-    if (![self.fetchedResultsController performFetch:&fetchError]) {
-        NSLog(@"Fetch error: %@", fetchError);
-    }
-    [self.tableView reloadData];
 }
 
 #pragma mark - NSFetchedResultsControllerDelegate

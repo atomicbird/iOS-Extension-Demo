@@ -12,7 +12,7 @@
 
 NSString *const kDemoNoteFilename = @"notes.bin";
 
-@interface TodayViewController () <NCWidgetProviding, NSFilePresenter>
+@interface TodayViewController () <NCWidgetProviding>
 
 @property (readwrite, strong) NSArray *objects;
 @property (readwrite, strong) NSManagedObjectContext *managedObjectContext;
@@ -48,26 +48,6 @@ NSString *const kDemoNoteFilename = @"notes.bin";
     // If there's an update, use NCUpdateResultNewData
 
     completionHandler(NCUpdateResultNewData);
-}
-
-#pragma mark - NSFilePresenter
-- (NSURL *)presentedItemURL
-{
-    NSURL *groupURL = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:@"group.com.atomicbird.demonotes"];
-    NSURL *fileURL = [groupURL URLByAppendingPathComponent:kDemoNoteFilename];
-    return fileURL;
-}
-
-- (NSOperationQueue *)presentedItemOperationQueue
-{
-    return [NSOperationQueue mainQueue];
-}
-
-- (void)presentedItemDidChange
-{
-    // This could be used to update the today view to show new or changed notes.
-    // In this app it's not needed because new notes can't be created while the today extension is visible--
-    // meaning that there's never a situation where this method would be useful.
 }
 
 #pragma mark - Table View

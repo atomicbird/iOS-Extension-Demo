@@ -9,12 +9,25 @@
 #import "DemoNoteManager.h"
 
 static NSString *const kDemoNoteFilename = @"notes.sqlite";
-NSString *const kDemoNotesNotificationFile = @"notes-notification.txt";
+NSString *const kDemoNotesSaveByAppNotification = @"kDemoNotesSaveByAppNotification";
+NSString *const kDemoNotesSaveByExtensionNotification = @"kDemoNotesSaveByExtensionNotification";
 
 @interface DemoNoteManager ()
 @property (readwrite, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
 @property (readwrite, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
+@property (readwrite, assign) BOOL observingChangeNotifications;
 @end
+
+void sharedDataChangedCallback(CFNotificationCenterRef postingCenter,
+                               void * observer,
+                               CFStringRef name,
+                               void const * object,
+                               CFDictionaryRef userInfo)
+{
+    // Springboard from Darwin notification center to NSNotificationCenter.
+    // Note that most of the received arguments are NULL with the Darwin notification center.
+    [[NSNotificationCenter defaultCenter] postNotificationName:kDemoNotesSaveByAppNotification object:[DemoNoteManager sharedManager]];
+}
 
 @implementation DemoNoteManager
 
@@ -26,6 +39,63 @@ NSString *const kDemoNotesNotificationFile = @"notes-notification.txt";
         sharedManager = [[DemoNoteManager alloc] init];
     });
     return sharedManager;
+}
+
+- (void)startObservingChangeNotifications
+{
+    if (self.observingChangeNotifications == NO) {
+        CFNotificationCenterRef const center = CFNotificationCenterGetDarwinNotifyCenter();
+        // The last two arguments below (object and suspensionBehavior) are ignored by the Darwin notification center.
+        CFNotificationCenterAddObserver(center, NULL, sharedDataChangedCallback, (CFStringRef)self.observingSaveNotificationName, NULL, CFNotificationSuspensionBehaviorDeliverImmediately);
+        
+        self.observingChangeNotifications = YES;
+    }
+}
+
+- (void)stopObservingChangeNotifications
+{
+    if (self.observingChangeNotifications == YES) {
+        CFNotificationCenterRef const center = CFNotificationCenterGetDarwinNotifyCenter();
+        CFNotificationCenterRemoveObserver(center, NULL, (CFStringRef)self.observingSaveNotificationName, NULL);
+        self.observingChangeNotifications = NO;
+    }
+}
+
+- (BOOL)runningInAppExtension
+{
+    // Check where we're running so that we can observe the right notification. This prevents
+    // notifying anyone of their own changes.
+    BOOL inExtension;
+    
+    if ([[[NSBundle mainBundle] infoDictionary] objectForKey:@"NSExtension"] == nil) {
+        inExtension = NO;
+    } else {
+        inExtension = YES;
+    }
+    
+    return inExtension;
+}
+
+- (NSString *)observingSaveNotificationName
+{
+    NSString *observingNotificationName;
+    if ([self runningInAppExtension]) {
+        observingNotificationName = kDemoNotesSaveByAppNotification;
+    } else {
+        observingNotificationName = kDemoNotesSaveByExtensionNotification;
+    }
+    return observingNotificationName;
+}
+
+- (NSString *)postingSaveNotificationName
+{
+    NSString *observingNotificationName;
+    if ([self runningInAppExtension]) {
+        observingNotificationName = kDemoNotesSaveByExtensionNotification;
+    } else {
+        observingNotificationName = kDemoNotesSaveByAppNotification;
+    }
+    return observingNotificationName;
 }
 
 - (NSManagedObjectModel *)managedObjectModel
@@ -64,29 +134,21 @@ NSString *const kDemoNotesNotificationFile = @"notes-notification.txt";
     return context;
 }
 
-- (NSURL *)presenterNotificationFileURL
-{
-    NSURL *groupURL = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:@"group.com.atomicbird.demonotes"];
-    NSURL *notificationFileURL = [groupURL URLByAppendingPathComponent:kDemoNotesNotificationFile];
-    return notificationFileURL;
-}
-
-- (void)saveManagedObjectContextWithPresenterNotification:(NSManagedObjectContext *)context
+- (BOOL)saveManagedObjectContextWithNotification:(NSManagedObjectContext *)context error:(NSError **)error
 {
     NSError *saveError = nil;
-    if ([context save:&saveError]) {
-        NSFileCoordinator *fileCoordinator = [[NSFileCoordinator alloc] initWithFilePresenter:nil];
-        NSError *coordinatedWriteError = nil;
-        [fileCoordinator coordinateWritingItemAtURL:[self presenterNotificationFileURL] options:0 error:&coordinatedWriteError byAccessor:^(NSURL *newURL) {
-            NSString *dateString = [[NSDate date] description];
-            NSError *writeError = nil;
-            if (![dateString writeToURL:newURL atomically:YES encoding:NSUTF8StringEncoding error:&writeError]) {
-                NSLog(@"Error in coordinated write: %@", [writeError localizedDescription]);
-            }
-        }];
+    BOOL success = [context save:&saveError];
+    if (success) {
+        CFNotificationCenterRef const center = CFNotificationCenterGetDarwinNotifyCenter();
+        // Note that all but the first two arguments below are ignored by the Darwin notification center.
+        CFNotificationCenterPostNotification(center, (CFStringRef)self.postingSaveNotificationName, NULL, NULL, YES);
     } else {
         NSLog(@"Core Data save error: %@", [saveError localizedDescription]);
+        if (error != nil) {
+            *error = saveError;
+        }
     }
+    return success;
 }
 
 @end

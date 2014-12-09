@@ -12,7 +12,7 @@
 
 NSString *const kDemoNoteFilename = @"notes.bin";
 
-@interface ShareViewController () <NSFilePresenter>
+@interface ShareViewController ()
 
 @property (weak, nonatomic) IBOutlet UITextView *textView;
 
@@ -64,7 +64,7 @@ NSString *const kDemoNoteFilename = @"notes.bin";
     DemoNote *newNote = [NSEntityDescription insertNewObjectForEntityForName:@"DemoNote" inManagedObjectContext:context];
     [newNote setText:self.textView.text];
     
-    [[DemoNoteManager sharedManager] saveManagedObjectContextWithPresenterNotification:context];
+    [[DemoNoteManager sharedManager] saveManagedObjectContextWithNotification:context error:nil];
     
     [self.extensionContext completeRequestReturningItems:nil completionHandler:nil];
 }
@@ -78,16 +78,4 @@ NSString *const kDemoNoteFilename = @"notes.bin";
     return @[];
 }
 
-#pragma mark - NSFilePresenter
-- (NSURL *)presentedItemURL
-{
-    NSURL *groupURL = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:@"group.com.atomicbird.demonotes"];
-    NSURL *fileURL = [groupURL URLByAppendingPathComponent:kDemoNoteFilename];
-    return fileURL;
-}
-
-- (NSOperationQueue *)presentedItemOperationQueue
-{
-    return [NSOperationQueue mainQueue];
-}
 @end
