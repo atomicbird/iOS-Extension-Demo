@@ -27,6 +27,7 @@
 		EE9D7EAC1A37BA1900B69194 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE9D7EAB1A37BA1900B69194 /* Interface.storyboard */; };
 		EE9D7EAE1A37BA1900B69194 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EE9D7EAD1A37BA1900B69194 /* Images.xcassets */; };
 		EE9D7EB11A37BA1900B69194 /* DemoNotes WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = EE9D7E971A37BA1900B69194 /* DemoNotes WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		EED1331B1A37F2EE0099B789 /* WatchDetailInterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = EED1331A1A37F2EE0099B789 /* WatchDetailInterfaceController.m */; };
 		EEDE71A21A141B9A007CD3D8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EEDE71A11A141B9A007CD3D8 /* main.m */; };
 		EEDE71A51A141B9A007CD3D8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EEDE71A41A141B9A007CD3D8 /* AppDelegate.m */; };
 		EEDE71A81A141B9A007CD3D8 /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEDE71A71A141B9A007CD3D8 /* MasterViewController.m */; };
@@ -182,6 +183,8 @@
 		EE9D7EAB1A37BA1900B69194 /* Interface.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Interface.storyboard; sourceTree = "<group>"; };
 		EE9D7EAD1A37BA1900B69194 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		EE9D7EB81A37BA5300B69194 /* DemoNotes WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "DemoNotes WatchKit Extension.entitlements"; sourceTree = "<group>"; };
+		EED133191A37F2EE0099B789 /* WatchDetailInterfaceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WatchDetailInterfaceController.h; sourceTree = "<group>"; };
+		EED1331A1A37F2EE0099B789 /* WatchDetailInterfaceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WatchDetailInterfaceController.m; sourceTree = "<group>"; };
 		EEDE719C1A141B9A007CD3D8 /* DemoNotes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DemoNotes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EEDE71A01A141B9A007CD3D8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EEDE71A11A141B9A007CD3D8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -302,6 +305,8 @@
 				EE9D7E9E1A37BA1900B69194 /* InterfaceController.m */,
 				EE4A6C7B1A37E75700E99791 /* DemoNoteRowController.h */,
 				EE4A6C7C1A37E75700E99791 /* DemoNoteRowController.m */,
+				EED133191A37F2EE0099B789 /* WatchDetailInterfaceController.h */,
+				EED1331A1A37F2EE0099B789 /* WatchDetailInterfaceController.m */,
 				EE9D7EA01A37BA1900B69194 /* Images.xcassets */,
 				EE9D7E9B1A37BA1900B69194 /* Supporting Files */,
 			);
@@ -813,6 +818,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EE9D7E9F1A37BA1900B69194 /* InterfaceController.m in Sources */,
+				EED1331B1A37F2EE0099B789 /* WatchDetailInterfaceController.m in Sources */,
 				EE4A6C7D1A37E75700E99791 /* DemoNoteRowController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

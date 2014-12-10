@@ -34,5 +34,20 @@
                 </controller>
             </objects>
         </scene>
+        <!--watchDetail-->
+        <scene sceneID="OnL-GO-ECx">
+            <objects>
+                <controller identifier="watchDetail" id="278-19-79O" customClass="WatchDetailInterfaceController">
+                    <items>
+                        <label width="1" height="1" alignment="left" text="Label" numberOfLines="0" id="XcQ-9I-ZAj"/>
+                    </items>
+                    <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <connections>
+                        <outlet property="textLabel" destination="XcQ-9I-ZAj" id="4HA-0r-Vsj"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="488" y="325"/>
+        </scene>
     </scenes>
 </document>

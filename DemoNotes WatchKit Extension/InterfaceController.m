@@ -54,6 +54,7 @@
 {
     NSDictionary *tappedNote = self.notes[rowIndex];
     NSLog(@"Selected note %@ at index %ld", tappedNote[@"text"], (long)rowIndex);
+    [self pushControllerWithName:@"watchDetail" context:tappedNote];
 }
 
 - (void)willActivate {
