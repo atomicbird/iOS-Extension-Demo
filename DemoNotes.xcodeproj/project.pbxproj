@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EE4A6C7D1A37E75700E99791 /* DemoNoteRowController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE4A6C7C1A37E75700E99791 /* DemoNoteRowController.m */; };
+		EE4A6C801A37E87200E99791 /* DemoSharedCode.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEDE71E71A156423007CD3D8 /* DemoSharedCode.framework */; };
 		EE55A10C1A25173800EA5E1B /* DemoNotes.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EE55A10A1A25173800EA5E1B /* DemoNotes.xcdatamodeld */; };
 		EE55A1471A25240800EA5E1B /* DemoNoteManager.h in Headers */ = {isa = PBXBuildFile; fileRef = EE55A1451A25240800EA5E1B /* DemoNoteManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EE55A1481A25240800EA5E1B /* DemoNoteManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EE55A1461A25240800EA5E1B /* DemoNoteManager.m */; };
@@ -18,6 +20,13 @@
 		EE9A19DD1A16898800CBD6AD /* Share to Note.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = EE9A19D21A16898800CBD6AD /* Share to Note.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		EE9A19E21A168BFD00CBD6AD /* DemoPreprocessor.js in Resources */ = {isa = PBXBuildFile; fileRef = EE9A19E11A168BFD00CBD6AD /* DemoPreprocessor.js */; };
 		EE9A19E41A168EEA00CBD6AD /* DemoSharedCode.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEDE71E71A156423007CD3D8 /* DemoSharedCode.framework */; };
+		EE9D7E991A37BA1900B69194 /* WatchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE9D7E981A37BA1900B69194 /* WatchKit.framework */; };
+		EE9D7E9F1A37BA1900B69194 /* InterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE9D7E9E1A37BA1900B69194 /* InterfaceController.m */; };
+		EE9D7EA11A37BA1900B69194 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EE9D7EA01A37BA1900B69194 /* Images.xcassets */; };
+		EE9D7EA51A37BA1900B69194 /* DemoNotes Watch App.app in Resources */ = {isa = PBXBuildFile; fileRef = EE9D7EA41A37BA1900B69194 /* DemoNotes Watch App.app */; };
+		EE9D7EAC1A37BA1900B69194 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE9D7EAB1A37BA1900B69194 /* Interface.storyboard */; };
+		EE9D7EAE1A37BA1900B69194 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EE9D7EAD1A37BA1900B69194 /* Images.xcassets */; };
+		EE9D7EB11A37BA1900B69194 /* DemoNotes WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = EE9D7E971A37BA1900B69194 /* DemoNotes WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		EEDE71A21A141B9A007CD3D8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EEDE71A11A141B9A007CD3D8 /* main.m */; };
 		EEDE71A51A141B9A007CD3D8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EEDE71A41A141B9A007CD3D8 /* AppDelegate.m */; };
 		EEDE71A81A141B9A007CD3D8 /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEDE71A71A141B9A007CD3D8 /* MasterViewController.m */; };
@@ -39,6 +48,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		EE4A6C7E1A37E86900E99791 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EEDE71941A141B9A007CD3D8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EEDE71E61A156423007CD3D8;
+			remoteInfo = DemoSharedCode;
+		};
 		EE9A19DB1A16898800CBD6AD /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EEDE71941A141B9A007CD3D8 /* Project object */;
@@ -52,6 +68,20 @@
 			proxyType = 1;
 			remoteGlobalIDString = EEDE71E61A156423007CD3D8;
 			remoteInfo = DemoSharedCode;
+		};
+		EE9D7EA61A37BA1900B69194 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EEDE71941A141B9A007CD3D8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EE9D7EA31A37BA1900B69194;
+			remoteInfo = "DemoNotes Watch App";
+		};
+		EE9D7EAF1A37BA1900B69194 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EEDE71941A141B9A007CD3D8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EE9D7E961A37BA1900B69194;
+			remoteInfo = "DemoNotes WatchKit Extension";
 		};
 		EEDE71B91A141B9A007CD3D8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -105,6 +135,7 @@
 			dstSubfolderSpec = 13;
 			files = (
 				EEDE71DD1A1560EC007CD3D8 /* DemoToday.appex in Embed App Extensions */,
+				EE9D7EB11A37BA1900B69194 /* DemoNotes WatchKit Extension.appex in Embed App Extensions */,
 				EE9A19DD1A16898800CBD6AD /* Share to Note.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
@@ -124,6 +155,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		EE4A6C7B1A37E75700E99791 /* DemoNoteRowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoNoteRowController.h; sourceTree = "<group>"; };
+		EE4A6C7C1A37E75700E99791 /* DemoNoteRowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoNoteRowController.m; sourceTree = "<group>"; };
 		EE55A10B1A25173800EA5E1B /* DemoNotes.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DemoNotes.xcdatamodel; sourceTree = "<group>"; };
 		EE55A1451A25240800EA5E1B /* DemoNoteManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoNoteManager.h; sourceTree = "<group>"; };
 		EE55A1461A25240800EA5E1B /* DemoNoteManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoNoteManager.m; sourceTree = "<group>"; };
@@ -138,6 +171,17 @@
 		EE9A19D91A16898800CBD6AD /* MainInterface.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainInterface.storyboard; sourceTree = "<group>"; };
 		EE9A19E11A168BFD00CBD6AD /* DemoPreprocessor.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = DemoPreprocessor.js; sourceTree = "<group>"; };
 		EE9A19E31A168C0D00CBD6AD /* Share to Note.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Share to Note.entitlements"; sourceTree = "<group>"; };
+		EE9D7E971A37BA1900B69194 /* DemoNotes WatchKit Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "DemoNotes WatchKit Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EE9D7E981A37BA1900B69194 /* WatchKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatchKit.framework; path = System/Library/Frameworks/WatchKit.framework; sourceTree = SDKROOT; };
+		EE9D7E9C1A37BA1900B69194 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EE9D7E9D1A37BA1900B69194 /* InterfaceController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InterfaceController.h; sourceTree = "<group>"; };
+		EE9D7E9E1A37BA1900B69194 /* InterfaceController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InterfaceController.m; sourceTree = "<group>"; };
+		EE9D7EA01A37BA1900B69194 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		EE9D7EA41A37BA1900B69194 /* DemoNotes Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "DemoNotes Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EE9D7EAA1A37BA1900B69194 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EE9D7EAB1A37BA1900B69194 /* Interface.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Interface.storyboard; sourceTree = "<group>"; };
+		EE9D7EAD1A37BA1900B69194 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		EE9D7EB81A37BA5300B69194 /* DemoNotes WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "DemoNotes WatchKit Extension.entitlements"; sourceTree = "<group>"; };
 		EEDE719C1A141B9A007CD3D8 /* DemoNotes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DemoNotes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EEDE71A01A141B9A007CD3D8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EEDE71A11A141B9A007CD3D8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -175,6 +219,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				EE9A19E41A168EEA00CBD6AD /* DemoSharedCode.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EE9D7E941A37BA1900B69194 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EE4A6C801A37E87200E99791 /* DemoSharedCode.framework in Frameworks */,
+				EE9D7E991A37BA1900B69194 /* WatchKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -241,6 +294,46 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		EE9D7E9A1A37BA1900B69194 /* DemoNotes WatchKit Extension */ = {
+			isa = PBXGroup;
+			children = (
+				EE9D7EB81A37BA5300B69194 /* DemoNotes WatchKit Extension.entitlements */,
+				EE9D7E9D1A37BA1900B69194 /* InterfaceController.h */,
+				EE9D7E9E1A37BA1900B69194 /* InterfaceController.m */,
+				EE4A6C7B1A37E75700E99791 /* DemoNoteRowController.h */,
+				EE4A6C7C1A37E75700E99791 /* DemoNoteRowController.m */,
+				EE9D7EA01A37BA1900B69194 /* Images.xcassets */,
+				EE9D7E9B1A37BA1900B69194 /* Supporting Files */,
+			);
+			path = "DemoNotes WatchKit Extension";
+			sourceTree = "<group>";
+		};
+		EE9D7E9B1A37BA1900B69194 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				EE9D7E9C1A37BA1900B69194 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		EE9D7EA81A37BA1900B69194 /* DemoNotes Watch App */ = {
+			isa = PBXGroup;
+			children = (
+				EE9D7EAB1A37BA1900B69194 /* Interface.storyboard */,
+				EE9D7EAD1A37BA1900B69194 /* Images.xcassets */,
+				EE9D7EA91A37BA1900B69194 /* Supporting Files */,
+			);
+			path = "DemoNotes Watch App";
+			sourceTree = "<group>";
+		};
+		EE9D7EA91A37BA1900B69194 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				EE9D7EAA1A37BA1900B69194 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		EEDE71931A141B9A007CD3D8 = {
 			isa = PBXGroup;
 			children = (
@@ -252,6 +345,8 @@
 				EEDE71E81A156423007CD3D8 /* DemoSharedCode */,
 				EEDE71F71A156423007CD3D8 /* DemoSharedCodeTests */,
 				EE9A19D31A16898800CBD6AD /* Share to Note */,
+				EE9D7E9A1A37BA1900B69194 /* DemoNotes WatchKit Extension */,
+				EE9D7EA81A37BA1900B69194 /* DemoNotes Watch App */,
 				EEDE71D01A1560EC007CD3D8 /* Frameworks */,
 				EEDE719D1A141B9A007CD3D8 /* Products */,
 			);
@@ -266,6 +361,8 @@
 				EEDE71E71A156423007CD3D8 /* DemoSharedCode.framework */,
 				EEDE71F11A156423007CD3D8 /* DemoSharedCodeTests.xctest */,
 				EE9A19D21A16898800CBD6AD /* Share to Note.appex */,
+				EE9D7E971A37BA1900B69194 /* DemoNotes WatchKit Extension.appex */,
+				EE9D7EA41A37BA1900B69194 /* DemoNotes Watch App.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -318,6 +415,7 @@
 			isa = PBXGroup;
 			children = (
 				EEDE71D11A1560EC007CD3D8 /* NotificationCenter.framework */,
+				EE9D7E981A37BA1900B69194 /* WatchKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -415,6 +513,40 @@
 			productReference = EE9A19D21A16898800CBD6AD /* Share to Note.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
+		EE9D7E961A37BA1900B69194 /* DemoNotes WatchKit Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EE9D7EB71A37BA1A00B69194 /* Build configuration list for PBXNativeTarget "DemoNotes WatchKit Extension" */;
+			buildPhases = (
+				EE9D7E931A37BA1900B69194 /* Sources */,
+				EE9D7E941A37BA1900B69194 /* Frameworks */,
+				EE9D7E951A37BA1900B69194 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EE4A6C7F1A37E86900E99791 /* PBXTargetDependency */,
+				EE9D7EA71A37BA1900B69194 /* PBXTargetDependency */,
+			);
+			name = "DemoNotes WatchKit Extension";
+			productName = "DemoNotes WatchKit Extension";
+			productReference = EE9D7E971A37BA1900B69194 /* DemoNotes WatchKit Extension.appex */;
+			productType = "com.apple.product-type.watchkit-extension";
+		};
+		EE9D7EA31A37BA1900B69194 /* DemoNotes Watch App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EE9D7EB61A37BA1A00B69194 /* Build configuration list for PBXNativeTarget "DemoNotes Watch App" */;
+			buildPhases = (
+				EE9D7EA21A37BA1900B69194 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "DemoNotes Watch App";
+			productName = "DemoNotes Watch App";
+			productReference = EE9D7EA41A37BA1900B69194 /* DemoNotes Watch App.app */;
+			productType = "com.apple.product-type.application.watchapp";
+		};
 		EEDE719B1A141B9A007CD3D8 /* DemoNotes */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = EEDE71C21A141B9A007CD3D8 /* Build configuration list for PBXNativeTarget "DemoNotes" */;
@@ -431,6 +563,7 @@
 				EEDE71DC1A1560EC007CD3D8 /* PBXTargetDependency */,
 				EEDE71FD1A156423007CD3D8 /* PBXTargetDependency */,
 				EE9A19DC1A16898800CBD6AD /* PBXTargetDependency */,
+				EE9D7EB01A37BA1900B69194 /* PBXTargetDependency */,
 			);
 			name = DemoNotes;
 			productName = DemoNotes;
@@ -528,6 +661,18 @@
 							};
 						};
 					};
+					EE9D7E961A37BA1900B69194 = {
+						CreatedOnToolsVersion = 6.2;
+						DevelopmentTeam = FZTVR399HK;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
+					};
+					EE9D7EA31A37BA1900B69194 = {
+						CreatedOnToolsVersion = 6.2;
+					};
 					EEDE719B1A141B9A007CD3D8 = {
 						CreatedOnToolsVersion = 6.1;
 						DevelopmentTeam = FZTVR399HK;
@@ -578,6 +723,8 @@
 				EEDE71E61A156423007CD3D8 /* DemoSharedCode */,
 				EEDE71F01A156423007CD3D8 /* DemoSharedCodeTests */,
 				EE9A19D11A16898800CBD6AD /* Share to Note */,
+				EE9D7E961A37BA1900B69194 /* DemoNotes WatchKit Extension */,
+				EE9D7EA31A37BA1900B69194 /* DemoNotes Watch App */,
 			);
 		};
 /* End PBXProject section */
@@ -589,6 +736,24 @@
 			files = (
 				EE9A19E21A168BFD00CBD6AD /* DemoPreprocessor.js in Resources */,
 				EE9A19DA1A16898800CBD6AD /* MainInterface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EE9D7E951A37BA1900B69194 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EE9D7EA51A37BA1900B69194 /* DemoNotes Watch App.app in Resources */,
+				EE9D7EA11A37BA1900B69194 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EE9D7EA21A37BA1900B69194 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EE9D7EAC1A37BA1900B69194 /* Interface.storyboard in Resources */,
+				EE9D7EAE1A37BA1900B69194 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -643,6 +808,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		EE9D7E931A37BA1900B69194 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EE9D7E9F1A37BA1900B69194 /* InterfaceController.m in Sources */,
+				EE4A6C7D1A37E75700E99791 /* DemoNoteRowController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EEDE71981A141B9A007CD3D8 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -691,6 +865,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		EE4A6C7F1A37E86900E99791 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EEDE71E61A156423007CD3D8 /* DemoSharedCode */;
+			targetProxy = EE4A6C7E1A37E86900E99791 /* PBXContainerItemProxy */;
+		};
 		EE9A19DC1A16898800CBD6AD /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = EE9A19D11A16898800CBD6AD /* Share to Note */;
@@ -700,6 +879,16 @@
 			isa = PBXTargetDependency;
 			target = EEDE71E61A156423007CD3D8 /* DemoSharedCode */;
 			targetProxy = EE9A19E51A168EF900CBD6AD /* PBXContainerItemProxy */;
+		};
+		EE9D7EA71A37BA1900B69194 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EE9D7EA31A37BA1900B69194 /* DemoNotes Watch App */;
+			targetProxy = EE9D7EA61A37BA1900B69194 /* PBXContainerItemProxy */;
+		};
+		EE9D7EB01A37BA1900B69194 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EE9D7E961A37BA1900B69194 /* DemoNotes WatchKit Extension */;
+			targetProxy = EE9D7EAF1A37BA1900B69194 /* PBXContainerItemProxy */;
 		};
 		EEDE71BA1A141B9A007CD3D8 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -782,6 +971,74 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		EE9D7EB21A37BA1A00B69194 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "DemoNotes WatchKit Extension/DemoNotes WatchKit Extension.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "DemoNotes WatchKit Extension/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_NAME = "${TARGET_NAME}";
+				PROVISIONING_PROFILE = "";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		EE9D7EB31A37BA1A00B69194 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "DemoNotes WatchKit Extension/DemoNotes WatchKit Extension.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				INFOPLIST_FILE = "DemoNotes WatchKit Extension/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_NAME = "${TARGET_NAME}";
+				PROVISIONING_PROFILE = "";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		EE9D7EB41A37BA1A00B69194 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				IBSC_MODULE = DemoNotes_WatchKit_Extension;
+				INFOPLIST_FILE = "DemoNotes Watch App/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				"TARGETED_DEVICE_FAMILY[sdk=iphonesimulator*]" = "1,4";
+			};
+			name = Debug;
+		};
+		EE9D7EB51A37BA1A00B69194 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				IBSC_MODULE = DemoNotes_WatchKit_Extension;
+				INFOPLIST_FILE = "DemoNotes Watch App/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				"TARGETED_DEVICE_FAMILY[sdk=iphonesimulator*]" = "1,4";
 			};
 			name = Release;
 		};
@@ -1039,6 +1296,24 @@
 			buildConfigurations = (
 				EE9A19DF1A16898800CBD6AD /* Debug */,
 				EE9A19E01A16898800CBD6AD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EE9D7EB61A37BA1A00B69194 /* Build configuration list for PBXNativeTarget "DemoNotes Watch App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EE9D7EB41A37BA1A00B69194 /* Debug */,
+				EE9D7EB51A37BA1A00B69194 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EE9D7EB71A37BA1A00B69194 /* Build configuration list for PBXNativeTarget "DemoNotes WatchKit Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EE9D7EB21A37BA1A00B69194 /* Debug */,
+				EE9D7EB31A37BA1A00B69194 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

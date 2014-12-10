@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>DemoNotes Watch App.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>4</integer>
+		</dict>
 		<key>DemoNotes.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -28,6 +33,11 @@
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>EE9A19D11A16898800CBD6AD</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EE9D7EA31A37BA1900B69194</key>
 		<dict>
 			<key>primary</key>
 			<true/>
