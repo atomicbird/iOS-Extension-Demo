@@ -19,35 +19,33 @@
 
 @implementation InterfaceController
 
-- (instancetype)initWithContext:(id)context {
-    self = [super initWithContext:context];
-    if (self){
-        // Initialize variables here.
-        // Configure interface objects here.
-        NSLog(@"%@ initWithContext", self);
-        self.managedObjectContext = [[DemoNoteManager sharedManager] createManagedObjectContextWithConcurrencyType:NSMainQueueConcurrencyType];
-        
-        NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"DemoNote"];
-        NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:NO];
-        [fetchRequest setSortDescriptors:@[sortDescriptor]];
-        [fetchRequest setResultType:NSDictionaryResultType];
-        [fetchRequest setPropertiesToFetch:@[ @"text" ] ];
-        
-        NSError *fetchError = nil;
-        self.notes = [self.managedObjectContext executeFetchRequest:fetchRequest error:&fetchError];
-        if (self.notes == nil) {
-            NSLog(@"Fetch error: %@", [fetchError localizedDescription]);
-        }
-        
-        [self.table setNumberOfRows:self.notes.count withRowType:@"demoNoteRowType"];
-        for (NSInteger index=0; index<self.notes.count; index++) {
-            NSDictionary *noteInfo = self.notes[index];
-            DemoNoteRowController *rowController = [self.table rowControllerAtIndex:index];
-            
-            [rowController.rowLabel setText:noteInfo[@"text"]];
-        }
+- (void)awakeWithContext:(id)context {
+    [super awakeWithContext:context];
+    
+    // Initialize variables here.
+    // Configure interface objects here.
+    NSLog(@"%@ initWithContext", self);
+    self.managedObjectContext = [[DemoNoteManager sharedManager] createManagedObjectContextWithConcurrencyType:NSMainQueueConcurrencyType];
+    
+    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"DemoNote"];
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:NO];
+    [fetchRequest setSortDescriptors:@[sortDescriptor]];
+    [fetchRequest setResultType:NSDictionaryResultType];
+    [fetchRequest setPropertiesToFetch:@[ @"text" ] ];
+    
+    NSError *fetchError = nil;
+    self.notes = [self.managedObjectContext executeFetchRequest:fetchRequest error:&fetchError];
+    if (self.notes == nil) {
+        NSLog(@"Fetch error: %@", [fetchError localizedDescription]);
     }
-    return self;
+    
+    [self.table setNumberOfRows:self.notes.count withRowType:@"demoNoteRowType"];
+    for (NSInteger index=0; index<self.notes.count; index++) {
+        NSDictionary *noteInfo = self.notes[index];
+        DemoNoteRowController *rowController = [self.table rowControllerAtIndex:index];
+        
+        [rowController.rowLabel setText:noteInfo[@"text"]];
+    }
 }
 
 - (void)table:(WKInterfaceTable *)table didSelectRowAtIndex:(NSInteger)rowIndex

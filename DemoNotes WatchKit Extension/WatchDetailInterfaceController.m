@@ -10,12 +10,11 @@
 
 @implementation WatchDetailInterfaceController
 
-- (instancetype)initWithContext:(id)context {
-    self = [super initWithContext:context];
+- (void)awakeWithContext:(id)context {
+    [super awakeWithContext:context];
     if (self){
         [self.textLabel setText:[context valueForKey:@"text"]];
     }
-    return self;
 }
 
 @end
