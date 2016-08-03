@@ -33,6 +33,7 @@ NSString *const kDemoNoteFilename = @"notes.bin";
     self.objects = fetchedObjects;
 
     self.preferredContentSize = CGSizeMake(self.preferredContentSize.width, self.objects.count * 44.0 /* self.tableView.rowHeight*/);
+    [self.extensionContext setWidgetLargestAvailableDisplayMode:NCWidgetDisplayModeExpanded];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -73,6 +74,17 @@ NSString *const kDemoNoteFilename = @"notes.bin";
 {
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"demonote:%ld", (long)indexPath.row]];
     [self.extensionContext openURL:url completionHandler:nil];
+}
+
+- (void)widgetActiveDisplayModeDidChange:(NCWidgetDisplayMode)activeDisplayMode withMaximumSize:(CGSize)maxSize {
+  
+    if (activeDisplayMode == NCWidgetDisplayModeCompact) {
+        self.preferredContentSize = maxSize;
+        NSLog(@"%@",NSStringFromCGSize(maxSize));
+    }
+    else {
+        self.preferredContentSize = CGSizeMake(self.preferredContentSize.width, self.objects.count * 44.0 /* self.tableView.rowHeight*/);
+    }
 }
 
 @end
