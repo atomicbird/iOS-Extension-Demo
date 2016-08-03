@@ -32,7 +32,7 @@ NSString *const kDemoNoteFilename = @"notes.bin";
     NSArray *fetchedObjects = [self.managedObjectContext executeFetchRequest:fetchRequest error:&fetchError];
     self.objects = fetchedObjects;
 
-    self.preferredContentSize = CGSizeMake(self.preferredContentSize.width, self.objects.count * 44.0 /* self.tableView.rowHeight*/);
+    [self setPreferredContentSizeToTableView];
     [self.extensionContext setWidgetLargestAvailableDisplayMode:NCWidgetDisplayModeExpanded];
 }
 
@@ -76,14 +76,18 @@ NSString *const kDemoNoteFilename = @"notes.bin";
     [self.extensionContext openURL:url completionHandler:nil];
 }
 
+- (void)setPreferredContentSizeToTableView {
+    CGFloat tableViewRowHeight = 44;
+    self.preferredContentSize = CGSizeMake(self.preferredContentSize.width, self.objects.count * tableViewRowHeight );
+}
+
 - (void)widgetActiveDisplayModeDidChange:(NCWidgetDisplayMode)activeDisplayMode withMaximumSize:(CGSize)maxSize {
   
     if (activeDisplayMode == NCWidgetDisplayModeCompact) {
         self.preferredContentSize = maxSize;
-        NSLog(@"%@",NSStringFromCGSize(maxSize));
     }
-    else {
-        self.preferredContentSize = CGSizeMake(self.preferredContentSize.width, self.objects.count * 44.0 /* self.tableView.rowHeight*/);
+    else { // NCWidgetDisplayModeExpanded, try to resize to the largest
+        [self setPreferredContentSizeToTableView];
     }
 }
 
